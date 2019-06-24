@@ -11,6 +11,3 @@ before_install:
 
 cache:
   yarn: true
-
-install:
-  - yarn install
