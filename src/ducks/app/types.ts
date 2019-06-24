@@ -1,0 +1,9 @@
+export default {
+  INIT_APP: '@app/INIT_APP',
+
+  LOGIN_USER: '@@app/LOGIN_USER',
+  REGISTER_USER: '@@app/REGISTER_USER',
+  LOGOUT_USER: '@@app/LOGOUT_USER',
+
+  FETCH_ARTICLES: '@@app/FETCH_ARTICLES'
+};

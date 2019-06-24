@@ -1,0 +1,27 @@
+@import 'assets/scss/variables';
+
+.Header {
+  background: $red1;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 2rem;
+}
+
+.navbar {
+  width: calc(100% - 50rem);
+}
+
+.languageSwitcher {
+  width: 30rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: $white;
+}
+
+.user {
+  width: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}

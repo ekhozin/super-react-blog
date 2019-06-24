@@ -1,0 +1,24 @@
+{
+  "languageSwitcher.en": "english",
+  "languageSwitcher.ru": "russian",
+  "languageSwitcher.lang": "language",
+
+  "errors.required": "required",
+  "errors.mustBeNumber": "must be a number",
+  "errors.incorrectUsernamePassword": "Incorrect username or password",
+  "errors.usernameAlreadyUsed": "Username already used",
+
+  "auth.gotoRegister": "Registration",
+  "auth.gotoLogin": "Login",
+  "auth.loginTitle": "Login",
+  "auth.registerTitle": "Registration",
+  "auth.username": "username",
+  "auth.password": "password",
+  "auth.usernamePlaceholder": "enter username",
+  "auth.passwordPlaceholder": "enter password",
+  "auth.signIn": "sign in",
+  "auth.signOut": "sign out",
+
+  "nav.homepage": "homepage",
+  "nav.articles": "articles"
+}

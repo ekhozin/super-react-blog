@@ -1,0 +1,15 @@
+@import 'assets/scss/variables';
+
+.LanguageSwitcher {
+  display: flex;
+  align-items: center;
+}
+
+.lang {
+  font-size: 1.4rem;
+}
+
+.dropdown {
+  width: 10rem;
+  margin-left: 1rem;
+}

@@ -1,0 +1,26 @@
+@import 'assets/scss/variables';
+
+.UserHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.name {
+  width: 60%;
+  text-align: right;
+  color: $white;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 1.4rem;
+}
+
+.buttonWrap {
+  width: 40%;
+  padding-left: 1rem;
+}
+
+.button {
+  width: 100%;
+}

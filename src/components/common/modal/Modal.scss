@@ -1,0 +1,54 @@
+@import 'assets/scss/variables';
+
+.wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: $modal;
+  overflow: auto;
+}
+
+.modal {
+  margin: 6rem auto 6rem;
+  max-width: 32rem;
+  color: $black;
+}
+
+.modalInner {
+  background-color: $white;
+  border-radius: 3px;
+}
+
+.header {
+  padding: 1rem 3rem 1rem 1rem;
+  border-bottom: 1px solid $gray2;
+  font-size: 1.8rem;
+  position: relative;
+}
+
+.closeButton {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.8rem;
+  font-size: 2rem;
+  line-height: 1;
+  background-color: transparent;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    color: $gray2;
+  }
+}
+
+.body {
+  padding: 1rem;
+  border-bottom: 1px solid $gray2;
+}
+
+.footer {
+  padding: 1rem;
+}

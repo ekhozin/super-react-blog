@@ -1,0 +1,19 @@
+@import "assets/scss/variables";
+
+.AuthLayout {
+  position: relative;
+  background-color: $gray1;
+  min-height: 100vh;
+  padding: 10rem 2rem;
+}
+
+.content {
+  margin: 0 auto;
+  max-width: 30rem;
+}
+
+.languageSwitcher {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+}

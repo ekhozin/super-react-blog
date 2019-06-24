@@ -1,0 +1,24 @@
+{
+  "languageSwitcher.en": "английский",
+  "languageSwitcher.ru": "русский",
+  "languageSwitcher.lang": "язык",
+
+  "errors.required": "обязательно",
+  "errors.mustBeNumber": "должно быть число",
+  "errors.incorrectUsernamePassword": "Неправильные имя пользователя или пароль",
+  "errors.usernameAlreadyUsed": "Имя пользователя уже используется",
+
+  "auth.gotoRegister": "Регистрация",
+  "auth.gotoLogin": "Авторизация",
+  "auth.loginTitle": "Логин",
+  "auth.registerTitle": "Регистрация",
+  "auth.username": "имя пользователя",
+  "auth.password": "пароль",
+  "auth.usernamePlaceholder": "введите имя пользователя",
+  "auth.passwordPlaceholder": "введите пароль",
+  "auth.signIn": "вход",
+  "auth.signOut": "выход",
+
+  "nav.homepage": "главная",
+  "nav.articles": "статьи"
+}

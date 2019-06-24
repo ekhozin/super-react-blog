@@ -1,0 +1,42 @@
+@import 'assets/scss/variables';
+
+.label {
+  display: block;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+
+  &.required {
+    &::after {
+      content: "*";
+      display: inline-block;
+      color: $red2;
+      margin-left: 0.3rem;
+    }
+  }
+}
+
+.field {
+  display: block;
+  height: 2rem;
+  padding: 0 0.5rem;
+  width: 100%;
+  border: 1px solid $gray2;
+  border-radius: 2px;
+  font-size: 1.2rem;
+
+  &:focus {
+    outline: none;
+    border-color: $black;
+  }
+}
+
+.errorMessage {
+  color: $red2;
+  font-size: 1rem;
+}
+
+.error {
+  .field {
+    border-color: $red2;
+  }
+}
