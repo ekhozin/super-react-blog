@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import styles from './Pagination.scss';
 
+/* eslint-disable */
 class Pagination extends React.PureComponent {
   renderItems = () => {
     const items = [];

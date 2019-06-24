@@ -31,7 +31,7 @@ Articles.propTypes = {
 
 
 Articles.defaultProps = {
-  articles: [],
+  articles: []
 };
 
 export default Articles;

@@ -3,7 +3,6 @@ import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import createSagaMiddleware from 'redux-saga';
 import createHistory from 'history/createBrowserHistory';
 import throttle from 'lodash.throttle';
-import Immutable from 'immutable';
 
 import rootReducer from './root-reducer';
 import rootSaga from './root-saga';
@@ -12,7 +11,7 @@ import DataSource from 'helpers/data-source';
 const history = createHistory();
 const sagaMiddleware = createSagaMiddleware();
 
-let middleware = [
+const middleware = [
   sagaMiddleware
 ];
 

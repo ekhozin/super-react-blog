@@ -8,11 +8,6 @@ import locales from 'constants/locales';
 import styles from './LanguageSwitcher.scss';
 
 class LanguageSwitcher extends React.PureComponent {
-  handleChange = (e) => {
-    const {value} = e.target;
-    this.props.onSwitchClick(value);
-  };
-
   getOptions = () => {
     const {intl} = this.props;
 
@@ -28,6 +23,10 @@ class LanguageSwitcher extends React.PureComponent {
     ];
   };
 
+  handleChange = (e) => {
+    const {value} = e.target;
+    this.props.onSwitchClick(value);
+  };
 
   render() {
     const {className, currentLocale} = this.props;

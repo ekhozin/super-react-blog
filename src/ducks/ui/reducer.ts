@@ -6,10 +6,10 @@ const initialState = Immutable.Map({
 });
 
 export default function(state = initialState, action) {
-  switch(action.type) {
+  switch (action.type) {
     case types.WINDOW_RESIZE:
       return state.set('windowSize', Immutable.fromJS(action.windowSize));
     default:
       return state;
   }
-};
+}

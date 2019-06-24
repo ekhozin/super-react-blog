@@ -30,12 +30,12 @@ Form.propTypes = {
   validate: PropTypes.func,
   children: PropTypes.func,
   validateOnBlur: PropTypes.bool
-}
+};
 
 Form.defaultProps = {
   validate: () => {},
   children: () => {},
   validateOnBlur: false
-}
+};
 
 export default Form;

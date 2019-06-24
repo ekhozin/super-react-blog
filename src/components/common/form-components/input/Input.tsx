@@ -7,12 +7,13 @@ import InputBase from './InputBase';
 class Input extends React.PureComponent {
   renderError = (meta) => {
     const {touched, error, dirtySinceLastSubmit, submitError} = meta;
+    const {submitError: subError} = this.props;
 
     switch (true) {
       case meta.touched && !!meta.error:
         return meta.error;
-      case meta.touched && !meta.dirtySinceLastSubmit && !!this.props.submitError:
-        return this.props.submitError;
+      case meta.touched && !meta.dirtySinceLastSubmit && !!subError:
+        return subError;
       default:
         //
     }
@@ -73,13 +74,17 @@ Input.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func,
   onFocus: PropTypes.func,
-  onBlur: PropTypes.func
+  onBlur: PropTypes.func,
+  submitError: PropTypes.node,
+  validate: PropTypes.func
 };
 
 Input.defaultProps = {
   type: 'text',
   labelText: null,
+  submitError: null,
   placeholder: '',
+  validate: () => {},
   validateFields: [],
   onChange: () => {},
   onFocus: () => {},

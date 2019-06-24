@@ -20,7 +20,7 @@ export default {
       type: types.REGISTER_USER,
       credentials,
       callback
-    }
+    };
   },
 
   logoutUser() {
@@ -33,6 +33,6 @@ export default {
     return {
       type: types.FETCH_ARTICLES,
       params
-    }
+    };
   }
 };

@@ -11,13 +11,14 @@
     "build:prod": "cross-env NODE_ENV=production webpack --progress",
     "analyze:bundle": "NODE_ENV=production webpack --progress --profile --json > stats.json && mv stats.json public/ && webpack-bundle-analyzer --exclude /assets/ -s gzip public/stats.json",
     "analyze:eslint": "./node_modules/.bin/eslint *.js src/**/*.js",
+    "lint": "eslint --ext .ts --ext .tsx src --color",
     "env": "cp .env.defaults .env",
     "check-types": "tsc",
-    "test": "jest",
+    "test": "jest --colors",
     "test-clear": "jest --clearCache",
     "server": "node server.js",
     "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
-    "precommit": "yarn test"
+    "precommit": "yarn test && yarn lint"
   },
   "husky": {
     "hooks": {
@@ -26,6 +27,7 @@
   },
   "dependencies": {
     "@types/classnames": "^2.2.7",
+
     "@types/history": "^4.7.2",
     "@types/humps": "^1.1.2",
     "@types/lodash.get": "^4.4.4",
@@ -72,6 +74,8 @@
     "@babel/preset-env": "^7.2.3",
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.1.0",
+    "@typescript-eslint/eslint-plugin": "^1.11.0",
+    "@typescript-eslint/parser": "^1.11.0",
     "autoprefixer": "^9.3.1",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.4",

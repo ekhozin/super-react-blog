@@ -34,7 +34,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     zIndex: modalsSelectors.selectModalIndexById(state, ownProps.id)
   };
-}
+};
 
 const mapDispatchToProps = {
   closeModal: modalsActions.closeModal

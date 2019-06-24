@@ -21,7 +21,7 @@ export function required(message) {
 export function mustBeNumber(message) {
   return function (value) {
     return isNaN(value) ? message : undefined;
-  }
+  };
 }
 
 /**
@@ -37,5 +37,5 @@ export function composeValidators(...validators) {
     return validators.reduce((error, validator) => {
       return error || validator(value);
     }, undefined);
-  }
+  };
 }

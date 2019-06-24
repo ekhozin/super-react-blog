@@ -22,7 +22,7 @@ ArticlePreview.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string,
   content: PropTypes.string,
-  imageUrl: PropTypes.string,
+  imageUrl: PropTypes.string
 };
 
 export default ArticlePreview;

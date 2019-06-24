@@ -10,9 +10,9 @@ const initialState = Immutable.fromJS({
 function showModal(state, action) {
   return state.withMutations((state) => {
     state.update('modalsIds', (modalsIds) => {
-        return modalsIds.indexOf(action.id) === -1 ?
-          modalsIds.push(action.id) : modalsIds;
-      })
+      return modalsIds.indexOf(action.id) === -1 ?
+        modalsIds.push(action.id) : modalsIds;
+    })
       .update('modalsById', (modalsById) => {
         return modalsById.has(action.id) ?
           modalsById :
@@ -29,8 +29,8 @@ function showModal(state, action) {
 function closeModal(state, action) {
   return state.withMutations((state) => {
     state.update('modalsIds', (modalsIds) => {
-        return modalsIds.filter((modalId) => modalId !== action.id);
-      })
+      return modalsIds.filter((modalId) => modalId !== action.id);
+    })
       .deleteIn(['modalsById', action.id]);
   });
 }
@@ -53,4 +53,4 @@ export default function(state = initialState, action) {
     default:
       return state;
   }
-};
+}

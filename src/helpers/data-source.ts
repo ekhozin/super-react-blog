@@ -84,6 +84,7 @@ class DataSource {
       const serializedState = JSON.stringify(state);
       DataSource.setItem('state', serializedState);
     } catch (err) {
+      /* eslint-disable-next-line */
       console.error('save state error ', err);
     }
   }

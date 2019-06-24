@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FORM_ERROR} from "final-form";
+import {FORM_ERROR} from 'final-form';
 import {FormattedMessage, injectIntl} from 'react-intl';
 
 import ROUTES from 'constants/routes';
@@ -19,22 +19,6 @@ class Register extends React.PureComponent {
     };
 
     return validatorRules[name];
-  };
-
-  handleSubmit = (credentials) => {
-    const {onRegister, intl: {formatMessage}} = this.props
-
-    return new Promise((resolve) => {
-      onRegister(credentials, resolve);
-    }).then((res) => {
-      if (res.errorCode) {
-        return {
-          [FORM_ERROR]: 'errors.usernameAlreadyUsed'
-        };
-      }
-
-      return {};
-    });
   };
 
   renderForm = (formProps) => {
@@ -83,6 +67,22 @@ class Register extends React.PureComponent {
         </div>
       </React.Fragment>
     );
+  };
+
+  handleSubmit = (credentials) => {
+    const {onRegister, intl: {formatMessage}} = this.props;
+
+    return new Promise((resolve) => {
+      onRegister(credentials, resolve);
+    }).then((res) => {
+      if (res.errorCode) {
+        return {
+          [FORM_ERROR]: 'errors.usernameAlreadyUsed'
+        };
+      }
+
+      return {};
+    });
   };
 
   render() {

@@ -1,5 +1,5 @@
 import types from './types';
-import locales from 'constants/locales'
+import locales from 'constants/locales';
 
 const initialState = locales.en;
 

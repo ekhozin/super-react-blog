@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {FORM_ERROR} from "final-form";
+// import {FORM_ERROR} from 'final-form';
 import {FormattedMessage, injectIntl} from 'react-intl';
 
 import ROUTES from 'constants/routes';
@@ -19,23 +19,6 @@ class Login extends React.PureComponent {
     };
 
     return validatorRules[name];
-  };
-
-  handleSubmit = (credentials) => {
-    const {onLogin, intl: {formatMessage}} = this.props
-
-    onLogin(credentials);
-    // return new Promise((resolve) => {
-    //   onLogin(credentials, resolve);
-    // }).then((res) => {
-    //   if (res.errorCode) {
-    //     return {
-    //       [FORM_ERROR]: 'errors.incorrectUsernamePassword'
-    //     };
-    //   }
-
-    //   return {};
-    // });
   };
 
   renderForm = (formProps) => {
@@ -86,6 +69,24 @@ class Login extends React.PureComponent {
         </div>
       </React.Fragment>
     );
+  };
+
+  handleSubmit = (credentials) => {
+    // const {onLogin, intl: {formatMessage}} = this.props;
+    const {onLogin} = this.props;
+
+    onLogin(credentials);
+    // return new Promise((resolve) => {
+    //   onLogin(credentials, resolve);
+    // }).then((res) => {
+    //   if (res.errorCode) {
+    //     return {
+    //       [FORM_ERROR]: 'errors.incorrectUsernamePassword'
+    //     };
+    //   }
+
+    //   return {};
+    // });
   };
 
   render() {
