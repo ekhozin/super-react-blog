@@ -16,7 +16,13 @@
     "test": "jest",
     "test-clear": "jest --clearCache",
     "server": "node server.js",
-    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls",
+    "precommit": "yarn test"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn precommit"
+    }
   },
   "dependencies": {
     "@types/classnames": "^2.2.7",
@@ -83,6 +89,7 @@
     "extract-text-webpack-plugin": "4.0.0-beta.0",
     "file-loader": "^2.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "husky": "^2.4.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
     "jest-enzyme": "^7.0.2",
