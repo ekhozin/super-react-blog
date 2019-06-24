@@ -15,7 +15,8 @@
     "check-types": "tsc",
     "test": "jest",
     "test-clear": "jest --clearCache",
-    "server": "node server.js"
+    "server": "node server.js",
+    "coveralls": "cat ./coverage/lcov.info | node node_modules/.bin/coveralls"
   },
   "dependencies": {
     "@types/classnames": "^2.2.7",
@@ -70,6 +71,7 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^0.1.19",
     "connect-history-api-fallback": "^1.6.0",
+    "coveralls": "^3.0.4",
     "css-loader": "^1.0.1",
     "dotenv-webpack": "^1.5.7",
     "enzyme": "^3.10.0",

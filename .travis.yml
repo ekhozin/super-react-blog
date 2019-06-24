@@ -8,4 +8,7 @@ before_install:
   - export PATH="$HOME/.yarn/bin:$PATH"
 
 script:
-  - yarn test
+  - yarn test -- --coverage
+
+after_script:
+  - COVERALLS_REPO_TOKEN=$coveralls_repo_token yarn coveralls
