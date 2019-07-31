@@ -1,38 +1,33 @@
 import {createSelector} from 'reselect';
 
 function selectArticlesState(state) {
-  return state.get('articles');
+  return state.articles;
 }
 
-function selectArticlesImmutable(state) {
-  return selectArticlesState(state).get('articles');
+function selectArticles(state) {
+  return selectArticlesState(state).articles;
 }
 
-function selectArticlesByIdImmutable(state) {
-  return selectArticlesImmutable(state).get('byId');
+function selectArticlesById(state) {
+  return selectArticles(state).byId;
 }
 
-function selectArticlesIdsImmutable(state) {
-  return selectArticlesImmutable(state).get('ids');
+function selectArticlesIds(state) {
+  return selectArticles(state).ids;
 }
 
-function selectPaginationImmutable(state) {
-  return selectArticlesState(state).get('pagination');
+function selectPagination(state) {
+  return selectArticlesState(state).pagination;
 }
 
-const selectArticles = createSelector(
-  [selectArticlesByIdImmutable, selectArticlesIdsImmutable],
+const selectArticlesList = createSelector(
+  [selectArticlesById, selectArticlesIds],
   (byId, ids) => {
-    return ids.map((id) => byId.get(`${id}`)).toJS();
+    return ids.map((id) => byId[id]);
   }
 );
 
-const selectPagination = createSelector(
-  selectPaginationImmutable,
-  (pagination) => pagination.toJS()
-);
-
 export default {
-  selectArticles,
+  selectArticlesList,
   selectPagination
 };

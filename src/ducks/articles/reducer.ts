@@ -1,36 +1,44 @@
-import Immutable from 'immutable';
 import {normalize, schema} from 'normalizr';
 import types from './types';
 
-const initialState = Immutable.fromJS({
+const initialState = {
   articles: {
     ids: [],
     byId: {}
   },
   pagination: {},
   error: null
-});
+};
 
 const articlesSchema = new schema.Entity('articles');
 const articlesListSchema = new schema.Array(articlesSchema);
 
 function requestArticles(state) {
-  return state.set('error', null);
+  return {
+    ...state,
+    error: null
+  };
 }
 
 function successArticles(state, action) {
   const {articles, pagination} = action.payload;
   const normalizedData = normalize(articles, articlesListSchema);
 
-  return state.withMutations((state) => {
-    state.setIn(['articles', 'ids'], Immutable.fromJS(normalizedData.result))
-      .setIn(['articles', 'byId'], Immutable.fromJS(normalizedData.entities.articles))
-      .set('pagination', Immutable.fromJS(pagination));
-  });
+  return {
+    ...state,
+    articles: {
+      ids: normalizedData.result,
+      byId: normalizedData.entities.articles
+    },
+    pagination,
+  };
 }
 
 function errorArticles(state, action) {
-  return state.set('error', Immutable.fromJS(action.error));
+  return {
+    ...state,
+    error: action.error
+  };
 }
 
 export default function(state = initialState, action) {

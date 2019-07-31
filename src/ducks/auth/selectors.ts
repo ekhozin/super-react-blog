@@ -1,30 +1,20 @@
 import {createSelector} from 'reselect';
 
 function selectAuthState(state) {
-  return state.get('auth');
+  return state.auth;
 }
 
 function selectIsAuthenticated(state) {
-  return selectAuthState(state).get('isAuthenticated');
+  return selectAuthState(state).isAuthenticated;
 }
 
-function selectUserImmutable(state) {
-  return selectAuthState(state).get('user');
+function selectUser(state) {
+  return selectAuthState(state).user;
 }
 
-function selectErrorImmutable(state) {
-  return selectAuthState(state).get('error');
+function selectError(state) {
+  return selectAuthState(state).error;
 }
-
-const selectUser = createSelector(
-  selectUserImmutable,
-  (user) => user.toJS()
-);
-
-const selectError = createSelector(
-  selectErrorImmutable,
-  (error) => error ? error.toJS() : null
-);
 
 export default {
   selectIsAuthenticated,

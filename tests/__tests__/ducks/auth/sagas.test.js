@@ -1,5 +1,4 @@
 // jest.mock('tests/__mocks__/apiCallsMocks/fetchUser.js');
-import Immutable from 'immutable';
 import {call, put} from 'redux-saga/effects';
 import { expectSaga, testSaga } from 'redux-saga-test-plan';
 import * as matchers from 'redux-saga-test-plan/matchers';
@@ -23,13 +22,11 @@ describe('auth sagas', () => {
         .provide([
           [matchers.call.fn(services.fetchUser), userResponse]
         ])
-        .hasFinalState(
-          Immutable.fromJS({
-            isAuthenticated: true,
-            error: null,
-            user: userResponse.user
-          })
-        )
+        .hasFinalState({
+          isAuthenticated: true,
+          error: null,
+          user: userResponse.user
+        })
         .run();
     });
 

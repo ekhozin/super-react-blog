@@ -1,5 +1,4 @@
 import {AUTH_TOKEN_KEY} from 'config';
-import Immutable from 'immutable';
 
 interface IKeys {
   token: string;
@@ -77,9 +76,7 @@ class DataSource {
         return undefined;
       }
 
-      const parsed = JSON.parse(serializedState);
-
-      return Immutable.fromJS(parsed);
+      return JSON.parse(serializedState);
     } catch (err) {
       return undefined;
     }

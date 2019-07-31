@@ -1,46 +1,33 @@
 import {createSelector} from 'reselect';
 
 function selectModalsState(state) {
-  return state.get('modals');
+  return state.modals;
 }
 
-function selectModalsByIdImmutable(state) {
-  return selectModalsState(state).get('modalsById');
+function selectModalsById(state) {
+  return selectModalsState(state).modalsById;
 }
 
-function selectModalsIdsImmutable(state) {
-  return selectModalsState(state).get('modalsIds');
+function selectModalsIds(state) {
+  return selectModalsState(state).modalsIds;
 }
-
-const selectModalsImmutable = createSelector(
-  [selectModalsByIdImmutable, selectModalsIdsImmutable],
-  (modalsById, modalsIds) => {
-    return modalsIds.map((modalId) => modalsById.get(modalId));
-  }
-);
 
 const selectModals = createSelector(
-  selectModalsImmutable,
-  (modals) => {
-    return modals.toJS();
+  [selectModalsById, selectModalsIds],
+  (modalsById, modalsIds) => {
+    return modalsIds.map((modalId) => modalsById[modalId]);
   }
 );
 
-function selectModalByIdImmutable(state, id) {
-  return selectModalsByIdImmutable(state).get(id);
+function selectModalById(state, id) {
+  return selectModalsById(state)[id];
 }
 
-const makeSelectModalById = () => createSelector(
-  selectModalByIdImmutable,
-  (modal) => modal.toJS()
-);
-
 function selectModalIndexById(state, id) {
-  return selectModalByIdImmutable(state, id).get('zIndex');
+  return selectModalById(state, id).zIndex;
 }
 
 export default {
   selectModals,
-  makeSelectModalById,
   selectModalIndexById
 };

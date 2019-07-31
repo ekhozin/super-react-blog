@@ -1,9 +1,9 @@
 function selectAppState(state) {
-  return state.get('app');
+  return state.app;
 }
 
 function selectIsInitialised(state) {
-  return selectAppState(state).get('isInitialised');
+  return selectAppState(state).isInitialised;
 }
 
 export default {

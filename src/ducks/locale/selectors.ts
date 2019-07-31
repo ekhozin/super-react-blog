@@ -1,7 +1,5 @@
-import Immutable from 'immutable';
-
 function selectLocaleState(state) {
-  return state.get('locale');
+  return state.locale;
 }
 
 export default {

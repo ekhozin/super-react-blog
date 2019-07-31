@@ -1,45 +1,46 @@
-import Immutable from 'immutable';
+import omit from 'lodash.omit';
 import types from './types';
 
-const initialState = Immutable.fromJS({
+const initialState = {
   zIndex: 1000,
   modalsIds: [],
   modalsById: {}
-});
+};
 
 function showModal(state, action) {
-  return state.withMutations((state) => {
-    state.update('modalsIds', (modalsIds) => {
-      return modalsIds.indexOf(action.id) === -1 ?
-        modalsIds.push(action.id) : modalsIds;
-    })
-      .update('modalsById', (modalsById) => {
-        return modalsById.has(action.id) ?
-          modalsById :
-          modalsById.set(action.id, Immutable.Map({
-            zIndex: state.get('zIndex'),
-            id: action.id,
-            config: Immutable.fromJS(action.config)
-          }));
-      })
-      .set('zIndex', state.get('zIndex') + 1);
-  });
+  return {
+    ...state,
+    modalsIds: state.modalsIds.indexOf(action.id) === -1 ?
+      [...state.modalsIds, action.id] :
+      state.modalsIds,
+    modalsById: state.modalsById[action.id] ?
+      state.modalsById :
+      {
+        ...state.modalsById,
+        [action.id]: {
+          zIndex: state.zIndex,
+          id: action.id,
+          config: action.config
+        }
+      },
+    zIndex: state.zIndex + 1
+  };
 }
 
 function closeModal(state, action) {
-  return state.withMutations((state) => {
-    state.update('modalsIds', (modalsIds) => {
-      return modalsIds.filter((modalId) => modalId !== action.id);
-    })
-      .deleteIn(['modalsById', action.id]);
-  });
+  return {
+    ...state,
+    modalsIds: state.modalsIds.filter((modalId) => modalId !== action.id),
+    modalsById: omit(state.modalsById, action.id)
+  };
 }
 
 function closeAllModals(state, action) {
-  return state.withMutations((state) => {
-    state.set('modalsIds', Immutable.List())
-      .set('modalsById', Immutable.Map());
-  });
+  return {
+    ...state,
+    modalsIds: [],
+    modalsById: {}
+  };
 }
 
 export default function(state = initialState, action) {

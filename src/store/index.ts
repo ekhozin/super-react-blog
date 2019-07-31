@@ -3,6 +3,7 @@ import {composeWithDevTools} from 'redux-devtools-extension/developmentOnly';
 import createSagaMiddleware from 'redux-saga';
 import createHistory from 'history/createBrowserHistory';
 import throttle from 'lodash.throttle';
+import omit from 'lodash.omit';
 
 import rootReducer from './root-reducer';
 import rootSaga from './root-saga';
@@ -25,7 +26,7 @@ const store = createStore(
 
 store.subscribe(throttle(() => {
   const state = store.getState();
-  const _state = state.deleteAll(['modals', 'ui']);
+  const _state = omit(state, ['modals', 'ui']);
 
   DataSource.saveState(_state);
 }, 1000));

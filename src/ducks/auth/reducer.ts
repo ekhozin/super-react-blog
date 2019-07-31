@@ -1,30 +1,38 @@
-import Immutable from 'immutable';
-
 import types from './types';
 
-const initialState = Immutable.fromJS({
+const initialState = {
   isAuthenticated: false,
   error: null,
   user: {}
-});
+};
 
 function requestUser(state) {
-  return state.set('error', null);
+  return {
+    ...state,
+    error: null
+  };
 }
 
 function successUser(state, action) {
-  return state.withMutations((state) => {
-    state.set('user', Immutable.fromJS(action.user)).
-      set('isAuthenticated', true);
-  });
+  return {
+    ...state,
+    user: action.user,
+    isAuthenticated: true
+  };
 }
 
 function errorUser(state, action) {
-  return state.set('error', Immutable.fromJS(action.error));
+  return {
+    ...state,
+    error: action.error
+  };
 }
 
 function logoutUser(state) {
-  return state.set('isAuthenticated', false);
+  return {
+    ...state,
+    isAuthenticated: false
+  };
 }
 
 export default function(state = initialState, action) {

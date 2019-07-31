@@ -48,7 +48,7 @@ ArticlesContainer.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  articles: articlesSelectors.selectArticles(state),
+  articles: articlesSelectors.selectArticlesList(state),
   pagination: articlesSelectors.selectPagination(state)
 });
 
