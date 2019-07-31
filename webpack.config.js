@@ -5,7 +5,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const autoprefixer = require('autoprefixer');
 const Dotenv = require('dotenv-webpack');
-// const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const publicFolder = path.resolve(__dirname, 'public');
@@ -225,19 +224,6 @@ const config = {
    */
   optimization: {
     minimizer: [
-      // new UglifyJsPlugin({
-      //   uglifyOptions: {
-      //     compress: {
-      //       warnings: false,
-      //       drop_console: true,
-      //       unused: true,
-      //       dead_code: true
-      //     },
-      //     output: {
-      //       comments: false
-      //     }
-      //   }
-      // })
       new TerserPlugin()
     ]
   }
