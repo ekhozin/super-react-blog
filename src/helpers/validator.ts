@@ -1,13 +1,16 @@
 import {convertToString} from 'helpers/helpers';
 
+type validatorResultType = string|null|undefined;
+type validatorFunctionType = (value: any) => validatorResultType;
+
 /**
  * Checks if the value is empty string or not.
  *
  * @param {String} message
  * @return {function}
  */
-export function required(message) {
-  return function(value = '') {
+export function required(message: string): validatorFunctionType {
+  return function(value = ''): validatorResultType {
     return convertToString(value).length ? null : message;
   };
 }
@@ -18,9 +21,9 @@ export function required(message) {
  * @param {String} message
  * @return {function}
  */
-export function mustBeNumber(message) {
-  return function (value) {
-    return isNaN(value) ? message : undefined;
+export function mustBeNumber(message: string): validatorFunctionType {
+  return function (value: any): validatorResultType {
+    return isNaN(value) ? message : null;
   };
 }
 
@@ -32,10 +35,13 @@ export function mustBeNumber(message) {
  * @return {function}
  */
 
-export function composeValidators(...validators) {
-  return function(value) {
-    return validators.reduce((error, validator) => {
-      return error || validator(value);
-    }, undefined);
+export function composeValidators(...validators: validatorFunctionType[]): validatorFunctionType {
+  return function(value: any): validatorResultType {
+    return validators.reduce(
+      (error: validatorResultType,validator: validatorFunctionType): validatorResultType => {
+        return error || validator(value);
+      },
+      undefined
+    );
   };
 }

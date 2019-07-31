@@ -67,6 +67,8 @@
           "error",
           "always"
         ],
+        "@typescript-eslint/no-use-before-define": "off",
+        "@typescript-eslint/prefer-interface": "off",
         "indent": "off",
         "quotes": [
             "error",

@@ -6,7 +6,7 @@ import toString from 'lodash.tostring';
  * @param {*} data
  * @return {Object}
  */
-export function parseJSON(data: any): object {
+export function parseJSON(data: string): any {
   try {
     return JSON.parse(data);
   } catch (e) {

@@ -68,7 +68,7 @@ class DataSource {
     DataSource.removeItem(this.keys.token);
   };
 
-  public loadState = (): any => {
+  public loadState = (): object|undefined => {
     try {
       const serializedState = DataSource.getItem('state');
 
@@ -82,7 +82,7 @@ class DataSource {
     }
   };
 
-  public saveState = (state: any): any => {
+  public saveState = (state: object): void => {
     try {
       const serializedState = JSON.stringify(state);
       DataSource.setItem('state', serializedState);

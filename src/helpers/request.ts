@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, {AxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
 import get from 'lodash.get';
 import humps from 'humps';
 
@@ -6,25 +6,11 @@ import {BASE_URL, TOKEN_ENDPOINTS} from 'config';
 import DataSource from 'helpers/data-source';
 import {parseJSON} from 'helpers/helpers';
 
-
-interface IConfig {
-  headers: {
-    common: {
-      Authorization: string|null;
-    };
-  };
-}
-
-interface IResponse {
-  config: {
-    url: string;
-  };
-  data: {
-    data: {
-      token: string;
-    };
-  };
-}
+type IError = {
+  status?: number;
+  statusText?: string;
+  errorCode?: string;
+};
 
 const request = axios.create({
   baseURL: BASE_URL
@@ -56,7 +42,7 @@ request.interceptors.response.use(responseMapper, errorHandle);
  * @param {AxiosRequestConfig} config
  * @return {AxiosRequestConfig}
  */
-function setJWTHeader(config: IConfig): IConfig {
+function setJWTHeader(config: AxiosRequestConfig): AxiosRequestConfig {
   config.headers.common['Authorization'] = DataSource.getToken();
 
   return config;
@@ -68,10 +54,12 @@ function setJWTHeader(config: IConfig): IConfig {
  * @param {AxiosResponse} response
  * @return {AxiosResponse}
  */
-function setJWTLocalStorage(response: IResponse): IResponse {
+function setJWTLocalStorage(response: AxiosResponse): AxiosResponse {
+  const url = get(response, 'config.url');
+
   switch (true) {
-    case new RegExp(`/${TOKEN_ENDPOINTS.REGISTER}$`).test(response.config.url):
-    case new RegExp(`/${TOKEN_ENDPOINTS.LOGIN}$`).test(response.config.url):
+    case new RegExp(`/${TOKEN_ENDPOINTS.REGISTER}$`).test(url):
+    case new RegExp(`/${TOKEN_ENDPOINTS.LOGIN}$`).test(url):
       const token = get(response, 'data.data.token');
 
       if (token) {
@@ -87,10 +75,10 @@ function setJWTLocalStorage(response: IResponse): IResponse {
 /**
  * Separates camelCased object keys with an underscore
  *
- * @param {AxiosRequestConfig} config - server's request
+ * @param {c} config - server's request
  * @return {AxiosRequestConfig}
  */
-function requestMapper(config) {
+function requestMapper(config: AxiosRequestConfig): AxiosRequestConfig {
   if (config.data && !(config.data instanceof FormData)) {
     const decamelizedData = humps.decamelizeKeys(config.data);
     delete config.data;
@@ -106,7 +94,7 @@ function requestMapper(config) {
  * @param {AxiosResponse} response - server's response
  * @return {Promise.<Object>}
  */
-function responseMapper(response) {
+function responseMapper(response: AxiosResponse): Promise<any> {
   return Promise.resolve(humps.camelizeKeys(response.data.data));
 }
 
@@ -116,14 +104,17 @@ function responseMapper(response) {
  * @param {AxiosResponse} data - server's response
  * @return {Promise.<Object>}
  */
-function errorHandle(data) {
-  const {response} = data;
-  const newError = {};
+function errorHandle(error: AxiosError): Promise<IError> {
+  const {response} = error;
   const errorCode = get(response, 'data.errors[0]');
+  const status = get(response, 'status');
+  const statusText = get(response, 'statusText');
 
-  newError.status = response.status;
-  newError.statusText = response.statusText;
-  newError.errorCode = parseJSON(errorCode);
+  const newError: IError = {
+    status,
+    statusText,
+    errorCode: parseJSON(errorCode)
+  };
 
   return Promise.reject(newError);
 }

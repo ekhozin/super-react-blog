@@ -983,6 +983,13 @@
   dependencies:
     "@types/lodash" "*"
 
+"@types/lodash.throttle@^4.1.6":
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/@types/lodash.throttle/-/lodash.throttle-4.1.6.tgz#f5ba2c22244ee42ff6c2c49e614401a870c1009c"
+  integrity sha512-/UIH96i/sIRYGC60NoY72jGkCJtFN5KVPhEMMMTjol65effe1gPn0tycJqV5tlSwMTzX8FqzB5yAj0rfGHTPNg==
+  dependencies:
+    "@types/lodash" "*"
+
 "@types/lodash.tostring@^4.1.4":
   version "4.1.4"
   resolved "https://registry.yarnpkg.com/@types/lodash.tostring/-/lodash.tostring-4.1.4.tgz#d69efa50118a1c7b0184a096ec2fd516ffd1bd59"
@@ -1016,6 +1023,11 @@
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.8.0.tgz#c565f43f9d2ec911f9e0b8f3b74e25e67879aa3f"
   dependencies:
     "@types/react" "*"
+
+"@types/react-intl@^2.3.18":
+  version "2.3.18"
+  resolved "https://registry.yarnpkg.com/@types/react-intl/-/react-intl-2.3.18.tgz#fd2d8b7f4d0a1dd05b5f1784ab0d7fe1786a690d"
+  integrity sha512-DVNJs49zUxKRZng8VuILE886Yihdsf3yLr5vHk9zJrmF8SyRSK3sxNSvikAKxNkv9hX55XBTJShz6CkJnbNjgg==
 
 "@types/react-redux@^6.0.12":
   version "6.0.13"
