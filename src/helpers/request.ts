@@ -6,6 +6,26 @@ import {BASE_URL, TOKEN_ENDPOINTS} from 'config';
 import DataSource from 'helpers/data-source';
 import {parseJSON} from 'helpers/helpers';
 
+
+interface IConfig {
+  headers: {
+    common: {
+      Authorization: string|null;
+    };
+  };
+}
+
+interface IResponse {
+  config: {
+    url: string;
+  };
+  data: {
+    data: {
+      token: string;
+    };
+  };
+}
+
 const request = axios.create({
   baseURL: BASE_URL
 });
@@ -36,7 +56,7 @@ request.interceptors.response.use(responseMapper, errorHandle);
  * @param {AxiosRequestConfig} config
  * @return {AxiosRequestConfig}
  */
-function setJWTHeader(config) {
+function setJWTHeader(config: IConfig): IConfig {
   config.headers.common['Authorization'] = DataSource.getToken();
 
   return config;
@@ -48,7 +68,7 @@ function setJWTHeader(config) {
  * @param {AxiosResponse} response
  * @return {AxiosResponse}
  */
-function setJWTLocalStorage(response) {
+function setJWTLocalStorage(response: IResponse): IResponse {
   switch (true) {
     case new RegExp(`/${TOKEN_ENDPOINTS.REGISTER}$`).test(response.config.url):
     case new RegExp(`/${TOKEN_ENDPOINTS.LOGIN}$`).test(response.config.url):

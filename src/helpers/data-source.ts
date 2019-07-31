@@ -1,15 +1,19 @@
 import {AUTH_TOKEN_KEY} from 'config';
 import Immutable from 'immutable';
 
+interface IKeys {
+  token: string;
+}
+
 /** Class representing a localStorage data source */
 class DataSource {
   /**
    * Gets value from localStorage by key
    *
    * @param {string} key
-   * @return {string}
+   * @return {string|null}
    */
-  static getItem = (key) => window.localStorage.getItem(key);
+  public static getItem = (key: string): string|null => window.localStorage.getItem(key);
 
   /**
    * Sets value to localStorage under key
@@ -18,7 +22,7 @@ class DataSource {
    * @param {string} value
    * @return {undefined}
    */
-  static setItem = (key, value) => {
+  public static setItem = (key: string, value: any): void => {
     window.localStorage.setItem(key, value);
   };
 
@@ -28,11 +32,13 @@ class DataSource {
    * @param {string} key
    * @return {undefined}
    */
-  static removeItem = (key) => {
+  public static removeItem = (key: string): void => {
     window.localStorage.removeItem(key);
   };
 
-  constructor() {
+  private keys: IKeys;
+
+  public constructor() {
     this.keys = {
       token: AUTH_TOKEN_KEY
     };
@@ -43,14 +49,14 @@ class DataSource {
    *
    * @return {string}
    */
-  getToken = () => DataSource.getItem(this.keys.token);
+  public getToken = (): string|null => DataSource.getItem(this.keys.token);
 
   /**
    * Sets token to localStorage
    *
    * @return {undefined}
    */
-  setToken = (value) => {
+  public setToken = (value: any): void => {
     DataSource.setItem(this.keys.token, value);
   };
 
@@ -59,11 +65,11 @@ class DataSource {
    *
    * @return {undefined}
    */
-  removeToken = () => {
+  public removeToken = (): void => {
     DataSource.removeItem(this.keys.token);
   };
 
-  loadState = () => {
+  public loadState = (): any => {
     try {
       const serializedState = DataSource.getItem('state');
 
@@ -79,7 +85,7 @@ class DataSource {
     }
   };
 
-  saveState = (state) => {
+  public saveState = (state: any): any => {
     try {
       const serializedState = JSON.stringify(state);
       DataSource.setItem('state', serializedState);

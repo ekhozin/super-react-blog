@@ -4,14 +4,13 @@ import toString from 'lodash.tostring';
  * Parse json if needed
  *
  * @param {*} data
- * @return {Object|*}
+ * @return {Object}
  */
-
-export function parseJSON(data) {
+export function parseJSON(data: any): object {
   try {
     return JSON.parse(data);
   } catch (e) {
-    return data;
+    return {};
   }
 }
 
@@ -21,6 +20,6 @@ export function parseJSON(data) {
  * @param {*} value
  * @return {String}
  */
-export function convertToString(value) {
+export function convertToString(value: any): string {
   return toString(value).trim();
 }

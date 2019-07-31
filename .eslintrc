@@ -2,7 +2,8 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        "plugin:@typescript-eslint/eslint-recommended"
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -60,13 +61,13 @@
                 ]
             }
         ],
-        "indent": [
-            "error",
-            2,
-            {
-                "SwitchCase": 1
-            }
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/indent": ["error", 2],
+        "@typescript-eslint/interface-name-prefix": [
+          "error",
+          "always"
         ],
+        "indent": "off",
         "quotes": [
             "error",
             "single",
