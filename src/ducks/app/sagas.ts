@@ -11,13 +11,13 @@ function* initAppSaga() {
 }
 
 function* loginUserSaga(action) {
-  const {credentials, callback} = action;
-  yield authSagas.loginSaga(credentials, callback);
+  const {credentials} = action;
+  yield authSagas.loginSaga(credentials);
 }
 
 function* registerUserSaga(action) {
-  const {credentials, callback} = action;
-  yield authSagas.registerSaga(credentials, callback);
+  const {credentials} = action;
+  yield authSagas.registerSaga(credentials);
 }
 
 function* logoutUserSaga() {

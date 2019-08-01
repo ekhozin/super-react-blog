@@ -1,10 +1,10 @@
-import types from './types';
+import types, {IAppState, AppActionTypes} from './types';
 
-const initialState = {
+const initialState: IAppState = {
   isInitialised: false
 };
 
-export default function(state = initialState, action) {
+export default function(state = initialState, action: AppActionTypes): IAppState {
   switch (action.type) {
     case types.INIT_APP:
       return {

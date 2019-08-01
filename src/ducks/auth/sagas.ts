@@ -7,21 +7,16 @@ import services from './services';
 /**
  *
  * @param {UserCredentials} credentials
- * @param {function} callback
  * @return {IterableIterator<*>}
  */
-function* loginSaga(credentials, callback) {
-  const cb = typeof callback === 'function' ? callback : () => {};
-
+function* loginSaga(credentials) {
   try {
     yield put(actions.loginUserRequest());
     const {user} = yield call(services.login, credentials);
     yield put(actions.loginUserSuccess(user));
-    yield call(cb, user);
     // TODO: return?
   } catch (error) {
-    yield put(actions.loginUserError(error));
-    yield call(cb, error);
+    yield put(actions.loginUserError(error));;
     // TODO: return?
   }
 }
@@ -29,21 +24,16 @@ function* loginSaga(credentials, callback) {
 /**
  *
  * @param {UserCredentials} credentials
- * @param {function} callback
  * @return {IterableIterator<*>}
  */
-function* registerSaga(credentials, callback) {
-  const cb = typeof callback === 'function' ? callback : () => {};
-
+function* registerSaga(credentials) {
   try {
     yield put(actions.registerUserRequest());
     const {user} = yield call(services.register, credentials);
     yield put(actions.registerUserSuccess(user));
-    yield call(cb, user);
     // TODO: return?
   } catch (error) {
     yield put(actions.registerUserError(error));
-    yield call(cb, error);
     // TODO: return?
   }
 }

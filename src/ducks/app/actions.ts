@@ -1,37 +1,44 @@
-import types from './types';
+import {
+  INIT_APP,
+  LOGIN_USER,
+  REGISTER_USER,
+  LOGOUT_USER,
+  FETCH_ARTICLES,
+  AppActionTypes
+} from './types';
+
+import {ICredentials, IQueryParams} from 'ts/interfaces/common';
 
 export default {
-  initApp() {
+  initApp(): AppActionTypes {
     return {
-      type: types.INIT_APP
+      type: INIT_APP
     };
   },
 
-  loginUser(credentials, callback) {
+  loginUser(credentials: ICredentials): AppActionTypes {
     return {
-      type: types.LOGIN_USER,
-      credentials,
-      callback
+      type: LOGIN_USER,
+      credentials
     };
   },
 
-  registerUser(credentials, callback) {
+  registerUser(credentials: ICredentials): AppActionTypes {
     return {
-      type: types.REGISTER_USER,
-      credentials,
-      callback
+      type: REGISTER_USER,
+      credentials
     };
   },
 
-  logoutUser() {
+  logoutUser(): AppActionTypes {
     return {
-      type: types.LOGOUT_USER
+      type: LOGOUT_USER
     };
   },
 
-  fetchArticles(params) {
+  fetchArticles(params: IQueryParams): AppActionTypes {
     return {
-      type: types.FETCH_ARTICLES,
+      type: FETCH_ARTICLES,
       params
     };
   }

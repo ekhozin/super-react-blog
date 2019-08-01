@@ -1,4 +1,5 @@
 import {createSelector} from 'reselect';
+import getByPath from 'lodash.get';
 
 function selectAuthState(state) {
   return state.auth;
@@ -13,7 +14,8 @@ function selectUser(state) {
 }
 
 function selectError(state) {
-  return selectAuthState(state).error;
+  const err = getByPath(state, 'error.statusText');
+  return err;
 }
 
 export default {
