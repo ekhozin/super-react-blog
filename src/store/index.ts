@@ -24,7 +24,7 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(...middleware))
 );
 
-store.subscribe(throttle(() => {
+store.subscribe(throttle((): void => {
   const state = store.getState();
   const _state = omit(state, ['modals', 'ui']);
 

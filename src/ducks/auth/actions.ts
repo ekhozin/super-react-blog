@@ -1,68 +1,91 @@
-import types from './types';
+import {IError} from 'ts/interfaces/common';
+import {
+  LOGIN_USER_REQUEST,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_ERROR,
+  REGISTER_USER_REQUEST,
+  REGISTER_USER_SUCCESS,
+  REGISTER_USER_ERROR,
+  LOGOUT_USER,
+  FETCH_USER_REQUEST,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_ERROR,
+  ILogoutUserAction,
+  ILoginUserRequestAction,
+  ILoginUserSuccessAction,
+  ILoginUserErrorAction,
+  IRegisterUserRequestAction,
+  IRegisterUserSuccessAction,
+  IRegisterUserErrorAction,
+  IFetchUserRequestAction,
+  IFetchUserSuccessAction,
+  IFetchUserErrorAction,
+  IUser
+} from './types';
 
 export default {
-  loginUserRequest() {
+  loginUserRequest(): ILoginUserRequestAction {
     return {
-      type: types.LOGIN_USER_REQUEST
+      type: LOGIN_USER_REQUEST
     };
   },
 
-  loginUserSuccess(user) {
+  loginUserSuccess(user: IUser): ILoginUserSuccessAction {
     return {
-      type: types.LOGIN_USER_SUCCESS,
+      type: LOGIN_USER_SUCCESS,
       user
     };
   },
 
-  loginUserError(error) {
+  loginUserError(error: IError): ILoginUserErrorAction {
     return {
-      type: types.LOGIN_USER_ERROR,
+      type: LOGIN_USER_ERROR,
       error
     };
   },
 
-  registerUserRequest() {
+  registerUserRequest(): IRegisterUserRequestAction {
     return {
-      type: types.REGISTER_USER_REQUEST
+      type: REGISTER_USER_REQUEST
     };
   },
 
-  registerUserSuccess(user) {
+  registerUserSuccess(user: IUser): IRegisterUserSuccessAction {
     return {
-      type: types.REGISTER_USER_SUCCESS,
+      type: REGISTER_USER_SUCCESS,
       user
     };
   },
 
-  registerUserError(error) {
+  registerUserError(error: IError): IRegisterUserErrorAction {
     return {
-      type: types.REGISTER_USER_ERROR,
+      type: REGISTER_USER_ERROR,
       error
     };
   },
 
-  logoutUser() {
+  logoutUser(): ILogoutUserAction {
     return {
-      type: types.LOGOUT_USER
+      type: LOGOUT_USER
     };
   },
 
-  fetchUserRequest() {
+  fetchUserRequest(): IFetchUserRequestAction {
     return {
-      type: types.FETCH_USER_REQUEST
+      type: FETCH_USER_REQUEST
     };
   },
 
-  fetchUserSuccess(user) {
+  fetchUserSuccess(user: IUser): IFetchUserSuccessAction {
     return {
-      type: types.FETCH_USER_SUCCESS,
+      type: FETCH_USER_SUCCESS,
       user
     };
   },
 
-  fetchUserError(error) {
+  fetchUserError(error: IError): IFetchUserErrorAction {
     return {
-      type: types.FETCH_USER_ERROR,
+      type: FETCH_USER_ERROR,
       error
     };
   }

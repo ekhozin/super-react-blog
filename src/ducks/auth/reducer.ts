@@ -1,19 +1,34 @@
-import types from './types';
+import {
+  AuthActionTypes,
+  SuccessActionTypes,
+  ErrorActionTypes,
+  IAuthState,
+  LOGIN_USER_SUCCESS,
+  LOGIN_USER_REQUEST,
+  LOGIN_USER_ERROR,
+  FETCH_USER_SUCCESS,
+  FETCH_USER_REQUEST,
+  FETCH_USER_ERROR,
+  REGISTER_USER_SUCCESS,
+  REGISTER_USER_REQUEST,
+  REGISTER_USER_ERROR,
+  LOGOUT_USER
+} from './types';
 
-const initialState = {
+const initialState: IAuthState = {
   isAuthenticated: false,
   error: null,
   user: {}
 };
 
-function requestUser(state) {
+function requestUser(state: IAuthState): IAuthState {
   return {
     ...state,
     error: null
   };
 }
 
-function successUser(state, action) {
+function successUser(state: IAuthState, action: SuccessActionTypes): IAuthState {
   return {
     ...state,
     user: action.user,
@@ -21,35 +36,35 @@ function successUser(state, action) {
   };
 }
 
-function errorUser(state, action) {
+function errorUser(state: IAuthState, action: ErrorActionTypes): IAuthState {
   return {
     ...state,
     error: action.error
   };
 }
 
-function logoutUser(state) {
+function logoutUser(state: IAuthState): IAuthState {
   return {
     ...state,
     isAuthenticated: false
   };
 }
 
-export default function(state = initialState, action) {
+export default function(state = initialState, action: AuthActionTypes): IAuthState {
   switch (action.type) {
-    case types.LOGIN_USER_REQUEST:
-    case types.FETCH_USER_REQUEST:
-    case types.REGISTER_USER_REQUEST:
+    case LOGIN_USER_REQUEST:
+    case FETCH_USER_REQUEST:
+    case REGISTER_USER_REQUEST:
       return requestUser(state);
-    case types.LOGIN_USER_SUCCESS:
-    case types.FETCH_USER_SUCCESS:
-    case types.REGISTER_USER_SUCCESS:
+    case LOGIN_USER_SUCCESS:
+    case FETCH_USER_SUCCESS:
+    case REGISTER_USER_SUCCESS:
       return successUser(state, action);
-    case types.LOGIN_USER_ERROR:
-    case types.FETCH_USER_ERROR:
-    case types.REGISTER_USER_ERROR:
+    case LOGIN_USER_ERROR:
+    case FETCH_USER_ERROR:
+    case REGISTER_USER_ERROR:
       return errorUser(state, action);
-    case types.LOGOUT_USER:
+    case LOGOUT_USER:
       return logoutUser(state);
     default:
       return state;

@@ -6,34 +6,34 @@ const REGISTER_USER = '@@app/REGISTER_USER';
 const LOGOUT_USER = '@@app/LOGOUT_USER';
 const FETCH_ARTICLES = '@@app/FETCH_ARTICLES';
 
-interface IAppState {
+export interface IAppState {
   isInitialised: boolean;
 }
 
-interface IInitAppAction {
+export interface IInitAppAction {
   type: typeof INIT_APP;
 }
 
-interface ILoginUserAction {
+export interface ILoginUserAction {
   type: typeof LOGIN_USER;
   credentials: ICredentials;
 }
 
-interface IRegisterUserAction {
+export interface IRegisterUserAction {
   type: typeof REGISTER_USER;
   credentials: ICredentials;
 }
 
-interface ILogoutUserAction {
+export interface ILogoutUserAction {
   type: typeof LOGOUT_USER;
 }
 
-interface IFetchArticlesAction {
+export interface IFetchArticlesAction {
   type: typeof FETCH_ARTICLES;
   params?: IQueryParams;
 }
 
-type AppActionTypes =
+export type AppActionTypes =
   IInitAppAction |
   ILoginUserAction |
   IRegisterUserAction |
@@ -41,12 +41,6 @@ type AppActionTypes =
   IFetchArticlesAction;
 
 export {
-  IAppState,
-  IInitAppAction,
-  IRegisterUserAction,
-  ILogoutUserAction,
-  IFetchArticlesAction,
-  AppActionTypes,
   INIT_APP,
   LOGIN_USER,
   REGISTER_USER,
@@ -54,7 +48,6 @@ export {
   FETCH_ARTICLES
 };
 
-// TODO: remove after replacing everywhere import
 export default {
   INIT_APP,
   LOGIN_USER,

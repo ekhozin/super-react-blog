@@ -1,14 +1,15 @@
-interface ICredentials {
+export interface ICredentials {
   username: string;
   password: string;
 }
 
-interface IQueryParams {
+export interface IQueryParams {
   offset?: number | string;
   limit?: number | string;
 }
 
-export {
-  ICredentials,
-  IQueryParams
-};
+export interface IError {
+  status?: number;
+  statusText?: string;
+  errorCode?: string;
+}

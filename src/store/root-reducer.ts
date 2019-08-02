@@ -7,7 +7,7 @@ import {modalsReducer} from 'ducks/modals';
 import {uiReducer} from 'ducks/ui';
 import {articlesReducer} from 'ducks/articles';
 
-export default combineReducers({
+const rootReducer = combineReducers({
   app: appReducer,
   auth: authReducer,
   locale: localeReducer,
@@ -15,3 +15,7 @@ export default combineReducers({
   ui: uiReducer,
   articles: articlesReducer
 });
+
+export type AppStateType = ReturnType<typeof rootReducer>;
+
+export default rootReducer;

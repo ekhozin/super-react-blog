@@ -2,15 +2,10 @@ import axios, {AxiosRequestConfig, AxiosResponse, AxiosError} from 'axios';
 import get from 'lodash.get';
 import humps from 'humps';
 
+import {IError} from 'ts/interfaces/common';
 import {BASE_URL, TOKEN_ENDPOINTS} from 'config';
 import DataSource from 'helpers/data-source';
 import {parseJSON} from 'helpers/helpers';
-
-type IError = {
-  status?: number;
-  statusText?: string;
-  errorCode?: string;
-};
 
 const request = axios.create({
   baseURL: BASE_URL
