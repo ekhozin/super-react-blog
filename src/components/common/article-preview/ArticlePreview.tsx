@@ -1,9 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Link from 'components/common/link/Link';
 
-function ArticlePreview(props) {
+interface IProps {
+  title?: string;
+  content?: string;
+  imageUrl?: string;
+}
+
+function ArticlePreview(props: IProps): React.ReactNode {
   const {title, content, imageUrl} = props;
 
   return (
@@ -17,12 +22,5 @@ function ArticlePreview(props) {
     </article>
   );
 }
-
-ArticlePreview.propTypes = {
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string,
-  content: PropTypes.string,
-  imageUrl: PropTypes.string
-};
 
 export default ArticlePreview;

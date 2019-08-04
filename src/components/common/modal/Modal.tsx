@@ -1,10 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import styles from './Modal.scss';
 
-class Modal extends React.PureComponent {
-  render() {
+interface IProps {
+  title?: React.ReactNode;
+  body?: React.ReactNode;
+  footer?: React.ReactNode;
+  zIndex: number;
+  onClose: () => void;
+}
+
+class Modal extends React.Component<IProps, {}> {
+  public render(): React.ReactNode {
     const {title, body, footer, zIndex, onClose} = this.props;
 
     return (
@@ -32,14 +39,5 @@ class Modal extends React.PureComponent {
     );
   }
 }
-
-Modal.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.node,
-  body: PropTypes.node,
-  footer: PropTypes.node,
-  zIndex: PropTypes.number.isRequired,
-  onClose: PropTypes.func.isRequired
-};
 
 export default Modal;

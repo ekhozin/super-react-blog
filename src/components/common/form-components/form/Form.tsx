@@ -2,6 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Form as FinalForm} from 'react-final-form';
 
+interface Props {
+  onSubmit: PropTypes.func.isRequired,
+  validate: PropTypes.func,
+  children: PropTypes.func,
+  validateOnBlur: boolean;
+};
+
 class Form extends React.Component {
   render() {
     const {
