@@ -1,12 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
+import {AppStateType} from 'store/root-reducer';
+import {IFetchArticles} from 'ducks/app/types';
+import {IPagination} from 'ts/interfaces/common';
+import {IArticle} from 'ducks/articles/types';
 import Articles from 'components/pages/articles/Articles';
-import {appActions} from 'ducks/app';
-import {articlesSelectors} from 'ducks/articles';
+import appActions from 'ducks/app/actions';
+import articlesSelectors from 'ducks/articles/selectors';
 
-function ArticlesContainer(props) {
+interface IReduxProps {
+  articles: IArticle[];
+  pagination: IPagination;
+}
+
+interface IProps extends IReduxProps {
+  fetchArticles: IFetchArticles;
+}
+
+function ArticlesContainer(props: IProps): React.ReactNode {
   const {articles, fetchArticles, pagination} = props;
   const [page, setPage] = useState(1);
 
@@ -36,18 +48,7 @@ function ArticlesContainer(props) {
   );
 }
 
-ArticlesContainer.propTypes = {
-  fetchArticles: PropTypes.func.isRequired,
-  articles: PropTypes.array.isRequired,
-  pagination: PropTypes.shape({
-    offset: PropTypes.number.isRequired,
-    limit: PropTypes.number.isRequired,
-    rowCount: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired
-  }).isRequired
-};
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType): IReduxProps => ({
   articles: articlesSelectors.selectArticlesList(state),
   pagination: articlesSelectors.selectPagination(state)
 });

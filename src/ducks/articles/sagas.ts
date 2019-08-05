@@ -1,8 +1,16 @@
 import {put, call} from 'redux-saga/effects';
+import {SagaIterator} from '@redux-saga/core';
+
+import {IQueryParams} from 'ts/interfaces/common';
 import actions from './actions';
 import services from './services';
 
-function* fetchArticlesSaga(params) {
+/**
+ *
+ * @param {IQueryParams} params
+ * @return {SagaIterator}
+ */
+export function* fetchArticlesSaga(params: IQueryParams): SagaIterator {
   try {
     yield put(actions.fetchArticlesRequest());
     const payload = yield call(services.fetchArticles, params);
@@ -11,7 +19,3 @@ function* fetchArticlesSaga(params) {
     yield put(actions.fetchArticlesError(error));
   }
 }
-
-export default {
-  fetchArticlesSaga
-};

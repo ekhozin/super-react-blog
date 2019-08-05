@@ -1,32 +1,32 @@
 import {call, put, all, takeLatest} from 'redux-saga/effects';
 import {SagaIterator} from '@redux-saga/core';
 
-import {authSagas} from 'ducks/auth';
-import {articlesSagas} from 'ducks/articles';
+import {loginSaga, registerSaga, fetchUserSaga, logoutSaga} from 'ducks/auth/sagas';
+import {fetchArticlesSaga} from 'ducks/articles/sagas';
 import actions from './actions';
 import types, {ILoginUserAction, IFetchArticlesAction} from './types';
 
 function* initAppSaga(): SagaIterator {
-  yield call(authSagas.fetchUserSaga);
+  yield call(fetchUserSaga);
   yield put(actions.initApp());
 }
 
-function* loginUserSaga(action: ILoginUserAction): SagaIterator {
+function* loginUserSaga(action: ILoginUserAction): IterableIterator<SagaIterator> {
   const {credentials} = action;
-  yield authSagas.loginSaga(credentials);
+  yield loginSaga(credentials);
 }
 
-function* registerUserSaga(action: ILoginUserAction): SagaIterator {
+function* registerUserSaga(action: ILoginUserAction): IterableIterator<SagaIterator> {
   const {credentials} = action;
-  yield authSagas.registerSaga(credentials);
+  yield registerSaga(credentials);
 }
 
-function* logoutUserSaga(): SagaIterator {
-  yield authSagas.logoutSaga();
+function* logoutUserSaga(): IterableIterator<SagaIterator> {
+  yield logoutSaga();
 }
 
-function* fetchArticles(action: IFetchArticlesAction): SagaIterator {
-  yield articlesSagas.fetchArticlesSaga(action.params);
+function* fetchArticles(action: IFetchArticlesAction): IterableIterator<SagaIterator> {
+  yield fetchArticlesSaga(action.params);
 }
 
 export default function* rootAppSaga(): SagaIterator {

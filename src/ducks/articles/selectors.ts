@@ -1,29 +1,38 @@
 import {createSelector} from 'reselect';
 
-function selectArticlesState(state) {
+import {AppStateType} from 'store/root-reducer';
+import {IPagination} from 'ts/interfaces/common';
+import {
+  IArticlesState,
+  IArticle,
+  IArticlesSliceState,
+  IArticlesByIdState
+} from './types';
+
+function selectArticlesState(state: AppStateType): IArticlesState {
   return state.articles;
 }
 
-function selectArticles(state) {
+function selectArticles(state: AppStateType): IArticlesSliceState {
   return selectArticlesState(state).articles;
 }
 
-function selectArticlesById(state) {
+function selectArticlesById(state: AppStateType): IArticlesByIdState {
   return selectArticles(state).byId;
 }
 
-function selectArticlesIds(state) {
+function selectArticlesIds(state: AppStateType): number[] {
   return selectArticles(state).ids;
 }
 
-function selectPagination(state) {
+function selectPagination(state: AppStateType): IPagination {
   return selectArticlesState(state).pagination;
 }
 
 const selectArticlesList = createSelector(
   [selectArticlesById, selectArticlesIds],
-  (byId, ids) => {
-    return ids.map((id) => byId[id]);
+  (byId: IArticlesByIdState, ids: number[]): IArticle[] => {
+    return ids.map((id: number): IArticle => byId[id]);
   }
 );
 

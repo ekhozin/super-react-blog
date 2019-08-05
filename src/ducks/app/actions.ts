@@ -4,7 +4,8 @@ import {
   REGISTER_USER,
   LOGOUT_USER,
   FETCH_ARTICLES,
-  AppActionTypes
+  AppActionTypes,
+  IFetchArticlesAction
 } from './types';
 
 import {ICredentials, IQueryParams} from 'ts/interfaces/common';

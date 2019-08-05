@@ -13,3 +13,10 @@ export interface IError {
   statusText?: string;
   errorCode?: string;
 }
+
+export interface IPagination {
+  offset: number;
+  limit: number;
+  rowCount: number;
+  pageCount: number;
+}

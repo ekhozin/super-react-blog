@@ -1,33 +1,32 @@
+import {AxiosPromise} from 'axios';
+
+import {ICredentials} from 'ts/interfaces/common';
 import API_ENDPOINTS from 'constants/api-endpoints';
 import request from 'helpers/request';
 
-/**
- * @typedef {Object} UserCredentials
- * @property {string} username
- * @property {string} password
- */
+import {IUserResponse} from './types';
 
 export default {
   /**
-   * @param {UserCredentials} credentials
-   * @return {Promise.<Object>}
+   * @param {ICredentials} credentials
+   * @return {AxiosPromise.<IUserResponse>}
    */
-  login(credentials) {
+  login(credentials: ICredentials): AxiosPromise<IUserResponse> {
     return request.post(API_ENDPOINTS.LOGIN, credentials);
   },
 
   /**
-   * @param {UserCredentials} credentials
-   * @return {Promise.<Object>}
+   * @param {ICredentials} credentials
+   * @return {AxiosPromise.<IUserResponse>}
    */
-  register(credentials) {
+  register(credentials: ICredentials): AxiosPromise<IUserResponse> {
     return request.post(API_ENDPOINTS.REGISTER, credentials);
   },
 
   /**
-   * @return {Promise.<Object>}
+   * @return {AxiosPromise.<IUserResponse>}
    */
-  fetchUser() {
+  fetchUser(): AxiosPromise<IUserResponse> {
     return request.get(API_ENDPOINTS.USER);
   }
 };

@@ -21,6 +21,10 @@ export interface IUser {
   updatedAt: string;
 }
 
+export interface IUserResponse {
+  user: IUser;
+}
+
 export interface IAuthState {
   isAuthenticated: boolean;
   error: IError | null;

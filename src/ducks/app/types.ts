@@ -6,6 +6,10 @@ const REGISTER_USER = '@@app/REGISTER_USER';
 const LOGOUT_USER = '@@app/LOGOUT_USER';
 const FETCH_ARTICLES = '@@app/FETCH_ARTICLES';
 
+export interface IFetchArticles {
+  (params: IQueryParams): IFetchArticlesAction;
+}
+
 export interface IAppState {
   isInitialised: boolean;
 }

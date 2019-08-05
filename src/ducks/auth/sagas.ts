@@ -1,32 +1,34 @@
 import {call, put} from 'redux-saga/effects';
+import {SagaIterator} from '@redux-saga/core';
 
+import {ICredentials} from 'ts/interfaces/common';
 import DataSource from 'helpers/data-source';
 import actions from './actions';
 import services from './services';
 
 /**
  *
- * @param {UserCredentials} credentials
- * @return {IterableIterator<*>}
+ * @param {ICredentials} credentials
+ * @return {SagaIterator}
  */
-function* loginSaga(credentials) {
+export function* loginSaga(credentials: ICredentials): SagaIterator {
   try {
     yield put(actions.loginUserRequest());
     const {user} = yield call(services.login, credentials);
     yield put(actions.loginUserSuccess(user));
     // TODO: return?
   } catch (error) {
-    yield put(actions.loginUserError(error));;
+    yield put(actions.loginUserError(error));
     // TODO: return?
   }
 }
 
 /**
  *
- * @param {UserCredentials} credentials
- * @return {IterableIterator<*>}
+ * @param {ICredentials} credentials
+ * @return {SagaIterator}
  */
-function* registerSaga(credentials) {
+export function* registerSaga(credentials: ICredentials): SagaIterator {
   try {
     yield put(actions.registerUserRequest());
     const {user} = yield call(services.register, credentials);
@@ -39,9 +41,9 @@ function* registerSaga(credentials) {
 }
 
 /**
- * @return {IterableIterator<*>}
+ * @return {SagaIterator}
  */
-function* fetchUserSaga() {
+export function* fetchUserSaga(): SagaIterator {
   try {
     yield put(actions.fetchUserRequest());
     const {user} = yield call(services.fetchUser);
@@ -52,16 +54,9 @@ function* fetchUserSaga() {
 }
 
 /**
- * @return {IterableIterator<*>}
+ * @return {SagaIterator}
  */
-function* logoutSaga() {
+export function* logoutSaga(): SagaIterator {
   yield put(actions.logoutUser());
   DataSource.removeToken();
 }
-
-export default {
-  loginSaga,
-  logoutSaga,
-  fetchUserSaga,
-  registerSaga
-};
