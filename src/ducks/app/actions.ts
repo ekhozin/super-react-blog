@@ -1,46 +1,59 @@
 import {
-  INIT_APP,
-  LOGIN_USER,
-  REGISTER_USER,
-  LOGOUT_USER,
-  FETCH_ARTICLES,
-  AppActionTypes,
-  IFetchArticlesAction
+  ActionNames,
+  IActions
 } from './types';
 
-import {ICredentials, IQueryParams} from 'ts/interfaces/common';
-
-export default {
-  initApp(): AppActionTypes {
+const actions: IActions = {
+  /**
+   * @return {IInitAppAction}
+   */
+  initApp() {
     return {
-      type: INIT_APP
+      type: ActionNames.INIT_APP
     };
   },
 
-  loginUser(credentials: ICredentials): AppActionTypes {
+  /**
+   * @param {ICredentials} credentials
+   * @return {ILoginUserAction}
+   */
+  loginUser(credentials) {
     return {
-      type: LOGIN_USER,
+      type: ActionNames.LOGIN_USER,
       credentials
     };
   },
 
-  registerUser(credentials: ICredentials): AppActionTypes {
+  /**
+   * @param {ICredentials} credentials
+   * @return {IRegisterUserAction}
+   */
+  registerUser(credentials) {
     return {
-      type: REGISTER_USER,
+      type: ActionNames.REGISTER_USER,
       credentials
     };
   },
 
-  logoutUser(): AppActionTypes {
+  /**
+   * @return {ILogoutUserAction}
+   */
+  logoutUser() {
     return {
-      type: LOGOUT_USER
+      type: ActionNames.LOGOUT_USER
     };
   },
 
-  fetchArticles(params: IQueryParams): AppActionTypes {
+  /**
+   * @param {IQueryParams} params
+   * @return {IFetchArticlesAction}
+   */
+  fetchArticles(params) {
     return {
-      type: FETCH_ARTICLES,
+      type: ActionNames.FETCH_ARTICLES,
       params
     };
   }
 };
+
+export default actions;

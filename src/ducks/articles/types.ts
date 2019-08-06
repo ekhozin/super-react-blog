@@ -1,10 +1,31 @@
 import {IUser} from 'ducks/auth/types';
 import {IPagination, IError} from 'ts/interfaces/common';
 
+/**
+ * Actions
+ */
 export enum ActionNames {
   FETCH_ARTICLES_REQUEST = '@@articles/FETCH_ARTICLES_REQUEST',
   FETCH_ARTICLES_SUCCESS = '@@articles/FETCH_ARTICLES_SUCCESS',
   FETCH_ARTICLES_ERROR = '@@articles/FETCH_ARTICLES_ERROR'
+}
+
+export interface IActions {
+  fetchArticlesRequest: IFetchArticlesRequest;
+  fetchArticlesSuccess: IFetchArticlesSuccess;
+  fetchArticlesError: IFetchArticlesError;
+}
+
+export interface IFetchArticlesRequest {
+  (): IFetchArticlesRequestAction;
+}
+
+export interface IFetchArticlesSuccess {
+  (articles: IArticlesData): IFetchArticlesSuccessAction;
+}
+
+export interface IFetchArticlesError {
+  (error: IError): IFetchArticlesErrorAction;
 }
 
 export interface IArticle {
@@ -27,20 +48,29 @@ export interface IArticlesData {
   pagination: IPagination;
 }
 
-export interface IFetchArticelsRequestAction {
-  type: ActionNames.FETCH_ARTICLES_REQUEST;
+export interface IFetchArticlesRequestAction {
+  type: typeof ActionNames.FETCH_ARTICLES_REQUEST;
 }
 
-export interface IFetchArticelsSuccessAction {
-  type: ActionNames.FETCH_ARTICLES_SUCCESS;
+export interface IFetchArticlesSuccessAction {
+  type: typeof ActionNames.FETCH_ARTICLES_SUCCESS;
   articles: IArticlesData;
 }
 
-export interface IFetchArticelsErrorAction {
-  type: ActionNames.FETCH_ARTICLES_ERROR;
+export interface IFetchArticlesErrorAction {
+  type: typeof ActionNames.FETCH_ARTICLES_ERROR;
   error: IError;
 }
 
+
+export type ArticleActions =
+  IFetchArticlesRequestAction |
+  IFetchArticlesSuccessAction |
+  IFetchArticlesErrorAction;
+
+/**
+ * State
+ */
 export interface IArticlesByIdState {
   [index: string]: IArticle;
 }
@@ -55,8 +85,3 @@ export interface IArticlesState {
   pagination: IPagination;
   error: IError | null;
 }
-
-export type ArticleActions =
-  IFetchArticelsRequestAction |
-  IFetchArticelsSuccessAction |
-  IFetchArticelsErrorAction;

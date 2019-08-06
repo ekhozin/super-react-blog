@@ -8,7 +8,7 @@
 
 .item {
   display: flex;
-  border: 1px solid $red1;
+  border: 1px solid currentColor;
   border-radius: 3px;
   width: 2rem;
   height: 2rem;
@@ -16,9 +16,20 @@
   align-items: center;
   margin: 0 0.5rem;
   color: $red1;
+
+  &:hover {
+    cursor: pointer;
+    color: darken($red1, 7%);
+  }
 }
 
 .active {
+  border: 1px solid $red1;
   background-color: $red1;
   color: $white;
+
+  &:hover {
+    cursor: default;
+    color: $white;
+  }
 }

@@ -8,7 +8,7 @@ interface IProps {
   imageUrl?: string;
 }
 
-function ArticlePreview(props: IProps): React.ReactNode {
+function ArticlePreview(props: IProps): React.ReactElement<IProps> {
   const {title, content, imageUrl} = props;
 
   return (

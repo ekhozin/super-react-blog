@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 
-import {AppStateType} from 'store/root-reducer';
+import {AppState} from 'store/root-reducer';
 import {IPagination} from 'ts/interfaces/common';
 import {
   IArticlesState,
@@ -9,23 +9,23 @@ import {
   IArticlesByIdState
 } from './types';
 
-function selectArticlesState(state: AppStateType): IArticlesState {
+function selectArticlesState(state: AppState): IArticlesState {
   return state.articles;
 }
 
-function selectArticles(state: AppStateType): IArticlesSliceState {
+function selectArticles(state: AppState): IArticlesSliceState {
   return selectArticlesState(state).articles;
 }
 
-function selectArticlesById(state: AppStateType): IArticlesByIdState {
+function selectArticlesById(state: AppState): IArticlesByIdState {
   return selectArticles(state).byId;
 }
 
-function selectArticlesIds(state: AppStateType): number[] {
+function selectArticlesIds(state: AppState): number[] {
   return selectArticles(state).ids;
 }
 
-function selectPagination(state: AppStateType): IPagination {
+function selectPagination(state: AppState): IPagination {
   return selectArticlesState(state).pagination;
 }
 

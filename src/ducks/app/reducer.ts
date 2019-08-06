@@ -1,4 +1,4 @@
-import types, {IAppState, AppActionTypes} from './types';
+import {ActionNames, IAppState, AppActionTypes} from './types';
 
 const initialState: IAppState = {
   isInitialised: false
@@ -6,7 +6,7 @@ const initialState: IAppState = {
 
 export default function(state = initialState, action: AppActionTypes): IAppState {
   switch (action.type) {
-    case types.INIT_APP:
+    case ActionNames.INIT_APP:
       return {
         ...state,
         isInitialised: true

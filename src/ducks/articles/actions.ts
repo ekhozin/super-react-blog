@@ -1,31 +1,40 @@
-import {IError} from 'ts/interfaces/common';
-
 import {
   ActionNames,
-  IFetchArticelsRequestAction,
-  IFetchArticelsSuccessAction,
-  IFetchArticelsErrorAction,
-  IArticlesData
+  IActions
 } from './types';
 
-export default {
-  fetchArticlesRequest(): IFetchArticelsRequestAction {
+const actions: IActions = {
+  /**
+   * @return {IFetchArticelsRequest}
+   */
+  fetchArticlesRequest() {
     return {
       type: ActionNames.FETCH_ARTICLES_REQUEST
     };
   },
 
-  fetchArticlesSuccess(articles: IArticlesData): IFetchArticelsSuccessAction {
+
+  /**
+   * @param {IArticlesData} articles
+   * @return {IFetchArticlesSuccess}
+   */
+  fetchArticlesSuccess(articles) {
     return {
       type: ActionNames.FETCH_ARTICLES_SUCCESS,
       articles
     };
   },
 
-  fetchArticlesError(error: IError): IFetchArticelsErrorAction {
+  /**
+   * @param {IError} error
+   * @return {IFetchArticlesError}
+   */
+  fetchArticlesError(error) {
     return {
       type: ActionNames.FETCH_ARTICLES_ERROR,
       error
     };
   }
 };
+
+export default actions;

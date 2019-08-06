@@ -1,16 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
+import {IPagination} from 'ts/interfaces/common';
+import {IArticle} from 'ducks/articles/types';
+import Pager, {IOnChange} from 'components/common/pager/Pager';
 import Pagination from 'components/common/pagination/Pagination';
 import ArticlePreview from 'components/common/article-preview/ArticlePreview';
 
-function Articles(props) {
-  const {articles} = props;
+interface IProps {
+  articles: IArticle[];
+  pagination: IPagination;
+  onPageChange: IOnChange;
+}
+
+function Articles(props: IProps): React.ReactElement<IProps> {
+  const {articles, pagination, onPageChange} = props;
+  const {offset, pageCount} = pagination;
 
   return (
     <div>
+      <Pager offset={offset} pageCount={pageCount} onChange={onPageChange}/>
       <div>
-        {articles.map((article) => <ArticlePreview key={article.id} {...article}/>)}
+        {articles.map((article): React.ReactNode => <ArticlePreview key={article.id} {...article}/>)}
       </div>
       <div>
         <Pagination currentPage={1}/>
@@ -18,17 +28,6 @@ function Articles(props) {
     </div>
   );
 }
-
-Articles.propTypes = {
-  articles: PropTypes.array,
-  pagination: PropTypes.shape({
-    offset: PropTypes.number.isRequired,
-    limit: PropTypes.number.isRequired,
-    rowCount: PropTypes.number.isRequired,
-    pageCount: PropTypes.number.isRequired
-  }).isRequired
-};
-
 
 Articles.defaultProps = {
   articles: []

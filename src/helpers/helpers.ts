@@ -3,10 +3,10 @@ import toString from 'lodash.tostring';
 /**
  * Parse json if needed
  *
- * @param {*} data
- * @return {Object}
+ * @param {string} data
+ * @return {object}
  */
-export function parseJSON(data: string): any {
+export function parseJSON(data: string): object {
   try {
     return JSON.parse(data);
   } catch (e) {
@@ -15,10 +15,10 @@ export function parseJSON(data: string): any {
 }
 
 /**
- * Converts value to string and trim spaces
+ * Converts value to string and trims spaces
  *
  * @param {*} value
- * @return {String}
+ * @return {string}
  */
 export function convertToString(value: any): string {
   return toString(value).trim();

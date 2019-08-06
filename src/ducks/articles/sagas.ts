@@ -10,7 +10,7 @@ import services from './services';
  * @param {IQueryParams} params
  * @return {SagaIterator}
  */
-export function* fetchArticlesSaga(params: IQueryParams): SagaIterator {
+export function* fetchArticlesSaga(params?: IQueryParams): SagaIterator {
   try {
     yield put(actions.fetchArticlesRequest());
     const payload = yield call(services.fetchArticles, params);

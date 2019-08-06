@@ -1,13 +1,43 @@
 import {ICredentials, IQueryParams} from 'ts/interfaces/common';
 
-const INIT_APP = '@app/INIT_APP';
-const LOGIN_USER = '@@app/LOGIN_USER';
-const REGISTER_USER = '@@app/REGISTER_USER';
-const LOGOUT_USER = '@@app/LOGOUT_USER';
-const FETCH_ARTICLES = '@@app/FETCH_ARTICLES';
+/**
+ * Actions
+ */
+
+export enum ActionNames {
+  INIT_APP = '@app/INIT_APP',
+  LOGIN_USER = '@@app/LOGIN_USER',
+  REGISTER_USER = '@@app/REGISTER_USER',
+  LOGOUT_USER = '@@app/LOGOUT_USER',
+  FETCH_ARTICLES = '@@app/FETCH_ARTICLES'
+}
+
+export interface IActions {
+  initApp: IInitApp;
+  loginUser: ILoginUser;
+  registerUser: IRegisterUser;
+  logoutUser: ILogoutUser;
+  fetchArticles: IFetchArticles;
+}
+
+export interface IInitApp {
+  (): IInitAppAction;
+}
 
 export interface IFetchArticles {
   (params: IQueryParams): IFetchArticlesAction;
+}
+
+export interface ILoginUser {
+  (credentials: ICredentials): ILoginUserAction;
+}
+
+export interface IRegisterUser {
+  (credentials: ICredentials): IRegisterUserAction;
+}
+
+export interface ILogoutUser {
+  (): ILogoutUserAction;
 }
 
 export interface IAppState {
@@ -15,25 +45,25 @@ export interface IAppState {
 }
 
 export interface IInitAppAction {
-  type: typeof INIT_APP;
+  type: typeof ActionNames.INIT_APP;
 }
 
 export interface ILoginUserAction {
-  type: typeof LOGIN_USER;
+  type: typeof ActionNames.LOGIN_USER;
   credentials: ICredentials;
 }
 
 export interface IRegisterUserAction {
-  type: typeof REGISTER_USER;
+  type: typeof ActionNames.REGISTER_USER;
   credentials: ICredentials;
 }
 
 export interface ILogoutUserAction {
-  type: typeof LOGOUT_USER;
+  type: typeof ActionNames.LOGOUT_USER;
 }
 
 export interface IFetchArticlesAction {
-  type: typeof FETCH_ARTICLES;
+  type: typeof ActionNames.FETCH_ARTICLES;
   params?: IQueryParams;
 }
 
@@ -43,19 +73,3 @@ export type AppActionTypes =
   IRegisterUserAction |
   ILogoutUserAction |
   IFetchArticlesAction;
-
-export {
-  INIT_APP,
-  LOGIN_USER,
-  REGISTER_USER,
-  LOGOUT_USER,
-  FETCH_ARTICLES
-};
-
-export default {
-  INIT_APP,
-  LOGIN_USER,
-  REGISTER_USER,
-  LOGOUT_USER,
-  FETCH_ARTICLES
-};

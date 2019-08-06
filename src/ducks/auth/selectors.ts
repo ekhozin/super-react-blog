@@ -1,21 +1,21 @@
-import {AppStateType} from 'store/root-reducer';
+import {AppState} from 'store/root-reducer';
 import getByPath from 'lodash.get';
 
 import {IAuthState, IUser} from './types';
 
-function selectAuthState(state: AppStateType): IAuthState {
+function selectAuthState(state: AppState): IAuthState {
   return state.auth;
 }
 
-function selectIsAuthenticated(state: AppStateType): boolean {
+function selectIsAuthenticated(state: AppState): boolean {
   return selectAuthState(state).isAuthenticated;
 }
 
-function selectUser(state: AppStateType): IUser | {} {
+function selectUser(state: AppState): IUser | {} {
   return selectAuthState(state).user;
 }
 
-function selectError(state: AppStateType): string {
+function selectError(state: AppState): string {
   const err = getByPath(state, 'error.statusText');
   return err;
 }

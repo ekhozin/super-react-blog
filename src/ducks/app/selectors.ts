@@ -1,12 +1,11 @@
-import {AppStateType} from 'store/root-reducer';
+import {AppState} from 'store/root-reducer';
 import {IAppState} from './types';
 
-
-function selectAppState(state: AppStateType): IAppState {
+function selectAppState(state: AppState): IAppState {
   return state.app;
 }
 
-function selectIsInitialised(state: AppStateType): boolean {
+function selectIsInitialised(state: AppState): boolean {
   return selectAppState(state).isInitialised;
 }
 

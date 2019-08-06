@@ -16,6 +16,6 @@ const rootReducer = combineReducers({
   articles: articlesReducer
 });
 
-export type AppStateType = ReturnType<typeof rootReducer>;
+export type AppState = ReturnType<typeof rootReducer>;
 
 export default rootReducer;

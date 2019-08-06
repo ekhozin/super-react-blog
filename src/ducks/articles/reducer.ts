@@ -3,8 +3,8 @@ import {
   ActionNames,
   ArticleActions,
   IArticlesState,
-  IFetchArticelsSuccessAction,
-  IFetchArticelsErrorAction
+  IFetchArticlesSuccessAction,
+  IFetchArticlesErrorAction
 } from './types';
 
 const initialState: IArticlesState = {
@@ -31,7 +31,7 @@ function requestArticles(state: IArticlesState): IArticlesState {
   };
 }
 
-function successArticles(state: IArticlesState, action: IFetchArticelsSuccessAction): IArticlesState {
+function successArticles(state: IArticlesState, action: IFetchArticlesSuccessAction): IArticlesState {
   const {articles, pagination} = action.articles;
   const normalizedData = normalize(articles, articlesListSchema);
 
@@ -45,7 +45,7 @@ function successArticles(state: IArticlesState, action: IFetchArticelsSuccessAct
   };
 }
 
-function errorArticles(state: IArticlesState, action: IFetchArticelsErrorAction): IArticlesState {
+function errorArticles(state: IArticlesState, action: IFetchArticlesErrorAction): IArticlesState {
   return {
     ...state,
     error: action.error
