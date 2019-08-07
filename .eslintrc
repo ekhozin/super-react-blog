@@ -45,7 +45,7 @@
         "react/no-did-update-set-state": "error",
         "react/no-unknown-property": "error",
         "react/react-in-jsx-scope": "error",
-        "react/prop-types": "error",
+        "react/prop-types": "off",
         "react/self-closing-comp": "error",
         "react/no-find-dom-node": "off",
         "react/sort-comp": [

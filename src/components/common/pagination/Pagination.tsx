@@ -1,82 +1,70 @@
-import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import classNames from 'classnames';
 
+import createItems, {itemTypes} from './create-items';
 import styles from './Pagination.scss';
 
-/* eslint-disable */
-function Pagination(props) {
-  const [currentPage, setPage] = useState(1);
+interface IProps {
+  className?: string;
+  currentPage: number;
+  totalPages: number;
+  maxDisplayItems: number;
+  withBorderItems?: boolean;
+  onChange: (page: number) => any;
+}
 
-  const renderItems = () => {
-    const items = [];
-    let maxDisplayItems = 5
-    let maxPages = 10;
+const Pagination: React.FC<IProps> = (props) => {
+  const {className, onChange, currentPage, withBorderItems} = props;
+  const cssClass = classNames(styles.pagination, className);
 
-    const offset = Math.floor(maxDisplayItems / 2);
+  const handleClick = (page: number) => (): void => {
+    onChange(page);
+  };
 
-    // TODO: refactor
-    if (currentPage === 1) { // first page is active
-      for (let i = 1; i <= maxDisplayItems; i++) {
-        items.push(i);
-      }
-    } else if (currentPage === maxPages) { // last page is active
-      for (let i = maxPages - maxDisplayItems + 1; i <= maxPages; i++) {
-        items.push(i);
-      }
-    } else if (maxPages <= maxDisplayItems) {
-      for (let i = 1; i <= maxDisplayItems; i++) {
-        items.push(i);
-      }
-    } else if (currentPage <= offset + 1) { // from start no more than offset
-      for (let i = 1; i <= maxDisplayItems; i++) {
-        items.push(i);
-      }
-    } else if (currentPage < maxPages && currentPage >= maxPages - offset) { // from end no more than offset
-      for (let i = maxPages - maxDisplayItems + 1; i <= maxPages; i++) {
-        items.push(i);
-      }
-    } else {
-      for (let i = currentPage - offset; i < currentPage; i++) { // right items
-        items.push(i);
-      }
-      for (let i = currentPage; i <= currentPage + offset; i++) { // current + left items
-        items.push(i);
-      }
-    }
+  const renderItems = (): React.ReactNode => {
+    const {maxDisplayItems, totalPages} = props;
+    const items = createItems(currentPage, totalPages, maxDisplayItems, withBorderItems);
 
     return (
       <React.Fragment>
-        {items.map(item => {
-          if (item === currentPage) {
-            return <div key={item} className={`${styles.item} ${styles.active}`}>{item}</div>
+        {items.map((item): any => {
+          const {page, type} = item;
+          const key = `${type}-${page}`;
+          const title = `${page}`;
+
+          if (type === itemTypes.ellipsis) {
+            return <li key={key} className={styles.ellipsis}>{'...'}</li>;
           }
 
-          return <div key={item} className={styles.item} onClick={() => setPage(item)}>{item}</div>;
+          if (type === itemTypes.prev) {
+            return <li title={title} key={key} className={styles.item} onClick={handleClick(page)}>{'<'}</li>;
+          }
+
+          if (type === itemTypes.next) {
+            return <li title={title} key={key} className={styles.item} onClick={handleClick(page)}>{'>'}</li>;
+          }
+
+          if (type === itemTypes.current) {
+            return <li title={title} key={key} className={`${styles.item} ${styles.active}`}>{page}</li>;
+          }
+
+          return <li title={title} key={key} className={styles.item} onClick={handleClick(page)}>{page}</li>;
         })}
       </React.Fragment>
     );
   };
 
-  const {className} = props;
-  const cssClass = classNames(styles.pagination, className);
-
   return (
-    <div className={cssClass}>
+    <ul className={cssClass}>
       {renderItems()}
-    </div>
+    </ul>
   );
-}
-
-Pagination.propTypes = {
-  className: PropTypes.string,
-  maxDisplayItems: PropTypes.number,
-  currentPage: PropTypes.number,
-  maxPages: PropTypes.number
 };
 
 Pagination.defaultProps = {
-  maxDisplayItems: 7
+  currentPage: 1,
+  totalPages: 1,
+  maxDisplayItems: 5
 };
 
 export default Pagination;
