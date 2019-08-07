@@ -19,6 +19,9 @@ function Articles(props: IProps): React.ReactElement<IProps> {
   return (
     <div>
       <div>
+        <Pagination currentPage={offset} totalPages={pageCount} maxDisplayItems={5} onChange={onPageChange}/>
+      </div>
+      <div>
         {articles.map((article): React.ReactNode => <ArticlePreview key={article.id} {...article}/>)}
       </div>
       <div>

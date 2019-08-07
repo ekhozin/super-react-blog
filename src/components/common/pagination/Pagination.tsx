@@ -1,7 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import createItems, {itemTypes} from './create-items';
+import PaginationItem from './PaginationItem';
+import createItems, {itemTypes, IItem} from './create-items';
 import styles from './Pagination.scss';
 
 interface IProps {
@@ -14,11 +15,36 @@ interface IProps {
 }
 
 const Pagination: React.FC<IProps> = (props) => {
+
   const {className, onChange, currentPage, withBorderItems} = props;
   const cssClass = classNames(styles.pagination, className);
 
-  const handleClick = (page: number) => (): void => {
-    onChange(page);
+  const itemsPropsMap = {
+    [itemTypes.current]: (itemProps: IItem): React.ReactNode => (
+      <PaginationItem {...itemProps} key={`${itemProps.type}-${itemProps.page}`} isCurrent={true}>
+        {itemProps.page}
+      </PaginationItem>
+    ),
+    [itemTypes.regular]: (itemProps: any): React.ReactNode => (
+      <PaginationItem {...itemProps} key={`${itemProps.type}-${itemProps.page}`} onClick={onChange}>
+        {itemProps.page}
+      </PaginationItem>
+    ),
+    [itemTypes.prev]: (itemProps: any): React.ReactNode => (
+      <PaginationItem {...itemProps} key={`${itemProps.type}-${itemProps.page}`} onClick={onChange}>
+        {'<'}
+      </PaginationItem>
+    ),
+    [itemTypes.next]: (itemProps: any): React.ReactNode => (
+      <PaginationItem {...itemProps} key={`${itemProps.type}-${itemProps.page}`} onClick={onChange}>
+        {'>'}
+      </PaginationItem>
+    ),
+    [itemTypes.ellipsis]: (itemProps: any): React.ReactNode => (
+      <PaginationItem {...itemProps} key={`${itemProps.type}-${itemProps.page}`} isEllipsis={true}>
+        {'...'}
+      </PaginationItem>
+    )
   };
 
   const renderItems = (): React.ReactNode => {
@@ -28,27 +54,8 @@ const Pagination: React.FC<IProps> = (props) => {
     return (
       <React.Fragment>
         {items.map((item): any => {
-          const {page, type} = item;
-          const key = `${type}-${page}`;
-          const title = `${page}`;
-
-          if (type === itemTypes.ellipsis) {
-            return <li key={key} className={styles.ellipsis}>{'...'}</li>;
-          }
-
-          if (type === itemTypes.prev) {
-            return <li title={title} key={key} className={styles.item} onClick={handleClick(page)}>{'<'}</li>;
-          }
-
-          if (type === itemTypes.next) {
-            return <li title={title} key={key} className={styles.item} onClick={handleClick(page)}>{'>'}</li>;
-          }
-
-          if (type === itemTypes.current) {
-            return <li title={title} key={key} className={`${styles.item} ${styles.active}`}>{page}</li>;
-          }
-
-          return <li title={title} key={key} className={styles.item} onClick={handleClick(page)}>{page}</li>;
+          const renderComponent = itemsPropsMap[item.type];
+          return renderComponent(item);
         })}
       </React.Fragment>
     );

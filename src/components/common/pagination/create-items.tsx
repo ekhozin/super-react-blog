@@ -1,6 +1,6 @@
 
 // TODO: constraints of 'type' - only from enum 'itemTypes'
-interface IItem {
+export interface IItem {
   type: string;
   page: number;
 }
@@ -30,7 +30,7 @@ const isCurrentType = (current: number) => (index: number): string => {
  * @return {Array<IItem>} Array of objects. Each object describes pagination item.
  */
 const createItems: ICreateItems = (currentPage, totalPages, maxDisplayItems, withBorderItems = true) => {
-  const items = [];
+  let items = [];
   const offset = Math.floor(maxDisplayItems / 2);
   const getCurrentType = isCurrentType(currentPage);
 
@@ -54,14 +54,10 @@ const createItems: ICreateItems = (currentPage, totalPages, maxDisplayItems, wit
     switch (true) {
       case currentPage === totalPages: // last page is active
         if (withBorderItems) {
-          items.push({
-            type: itemTypes.regular,
-            page: 1
-          });
-          items.push({
-            type: itemTypes.ellipsis,
-            page: currentPage - offset
-          });
+          items = items.concat([
+            {type: itemTypes.regular, page: 1},
+            {type: itemTypes.ellipsis, page: currentPage - offset}
+          ]);
         }
 
         const delta1 = Math.min(maxDisplayItems, totalPages);
@@ -80,26 +76,18 @@ const createItems: ICreateItems = (currentPage, totalPages, maxDisplayItems, wit
           });
         }
         if (withBorderItems) {
-          items.push({
-            type: itemTypes.ellipsis,
-            page: currentPage + offset
-          });
-          items.push({
-            type: itemTypes.regular,
-            page: totalPages
-          });
+          items = items.concat([
+            {type: itemTypes.ellipsis, page: currentPage + offset},
+            {type: itemTypes.regular, page: totalPages}
+          ]);
         }
         break;
       case currentPage < totalPages && currentPage >= totalPages - offset: // from end no more than offset
         if (withBorderItems) {
-          items.push({
-            type: itemTypes.regular,
-            page: 1
-          });
-          items.push({
-            type: itemTypes.ellipsis,
-            page: currentPage - offset
-          });
+          items = items.concat([
+            {type: itemTypes.regular, page: 1},
+            {type: itemTypes.ellipsis, page: currentPage - offset}
+          ]);
         }
         for (let i = totalPages - maxDisplayItems + 1; i <= totalPages; i++) {
           items.push({
@@ -110,14 +98,10 @@ const createItems: ICreateItems = (currentPage, totalPages, maxDisplayItems, wit
         break;
       default: // greater than offset, less than max pages
         if (withBorderItems) {
-          items.push({
-            type: itemTypes.regular,
-            page: 1
-          });
-          items.push({
-            type: itemTypes.ellipsis,
-            page: currentPage - offset
-          });
+          items = items.concat([
+            {type: itemTypes.regular, page: 1},
+            {type: itemTypes.ellipsis, page: currentPage - offset}
+          ]);
         }
 
         // fix for displaying correct amount if items when "maxDisplayItems" is even
@@ -137,14 +121,10 @@ const createItems: ICreateItems = (currentPage, totalPages, maxDisplayItems, wit
         }
 
         if (withBorderItems) {
-          items.push({
-            type: itemTypes.ellipsis,
-            page: currentPage + offset
-          });
-          items.push({
-            type: itemTypes.regular,
-            page: totalPages
-          });
+          items = items.concat([
+            {type: itemTypes.ellipsis, page: currentPage + offset},
+            {type: itemTypes.regular, page: totalPages}
+          ]);
         }
     }
   }
