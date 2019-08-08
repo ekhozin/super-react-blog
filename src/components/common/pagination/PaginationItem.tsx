@@ -3,17 +3,53 @@ import classNames from 'classnames';
 
 import styles from './Pagination.scss';
 
+// const defaultProps = {
+//   isCurrent: false,
+//   isEllipsis: false,
+//   onClick: (page: number): number => page
+// };
+
+// type TDefaultProps = Readonly<typeof defaultProps>;
+
+// type TProps = {
+//   page: number;
+// } & Partial<TDefaultProps>;
+
+// const PaginationItem: React.FC<TProps> = (props) => {
+//   const {children, onClick, isCurrent, isEllipsis, page} = props;
+//   const title = `${page}`;
+
+//   const className = classNames({
+//     [styles.item]: !isEllipsis,
+//     [styles.active]: isCurrent,
+//     [styles.ellipsis]: isEllipsis
+//   });
+
+//   const handleClick = (page: number) => (): void => {
+//     if (typeof onClick === 'function') {
+//       onClick(page);
+//     }
+//   };
+
+//   return <li title={title} className={className} onClick={handleClick(page)}>{children}</li>;
+// };
+
+// PaginationItem.defaultProps = defaultProps;
+
 const defaultProps = {
   isCurrent: false,
   isEllipsis: false,
   onClick: (page: number): number => page
 };
 
-type TProps = {
+interface IProps {
   page: number;
-} & typeof defaultProps;
+  isCurrent?: boolean;
+  isEllipsis?: boolean;
+  onClick?(page: number): number;
+}
 
-const PaginationItem: React.FC<TProps> = (props) => {
+const PaginationItem: React.FC<IProps> = (props) => {
   const {children, onClick, isCurrent, isEllipsis, page} = props;
   const title = `${page}`;
 
@@ -24,7 +60,9 @@ const PaginationItem: React.FC<TProps> = (props) => {
   });
 
   const handleClick = (page: number) => (): void => {
-    onClick(page);
+    if (typeof onClick === 'function') {
+      onClick(page);
+    }
   };
 
   return <li title={title} className={className} onClick={handleClick(page)}>{children}</li>;

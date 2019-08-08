@@ -2,7 +2,7 @@ import React from 'react';
 
 import {IPagination} from 'ts/interfaces/common';
 import {IArticle} from 'ducks/articles/types';
-import {IOnChange} from 'components/common/pager/Pager';
+import {IOnChange} from 'components/common/pagination/Pagination';
 import Pagination from 'components/common/pagination/Pagination';
 import ArticlePreview from 'components/common/article-preview/ArticlePreview';
 
