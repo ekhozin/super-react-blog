@@ -2,9 +2,9 @@ import {call, put, all, takeLatest} from 'redux-saga/effects';
 import {SagaIterator} from '@redux-saga/core';
 
 import {loginSaga, registerSaga, fetchUserSaga, logoutSaga} from 'ducks/auth/sagas';
-import {fetchArticlesSaga} from 'ducks/articles/sagas';
+import {fetchArticlesSaga, fetchArticleSaga} from 'ducks/articles/sagas';
 import actions from './actions';
-import {ActionNames, ILoginUserAction, IFetchArticlesAction} from './types';
+import {ActionNames, ILoginUserAction, IFetchArticlesAction, IFetchArticleAction} from './types';
 
 
 /**
@@ -49,6 +49,14 @@ function* fetchArticles(action: IFetchArticlesAction): IterableIterator<SagaIter
 }
 
 /**
+ * @param {IFetchArticleAction} action
+ * @return {IterableIterator<SagaIterator>}
+ */
+function* fetchArticle(action: IFetchArticleAction): IterableIterator<SagaIterator> {
+  yield fetchArticleSaga(action.id);
+}
+
+/**
  * @return {SagaIterator}
  */
 export default function* rootAppSaga(): SagaIterator {
@@ -57,6 +65,7 @@ export default function* rootAppSaga(): SagaIterator {
     takeLatest(ActionNames.LOGOUT_USER, logoutUserSaga),
     takeLatest(ActionNames.REGISTER_USER, registerUserSaga),
     takeLatest(ActionNames.FETCH_ARTICLES, fetchArticles),
+    takeLatest(ActionNames.FETCH_ARTICLE, fetchArticle),
     call(initAppSaga)
   ]);
 }

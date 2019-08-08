@@ -53,6 +53,17 @@ const actions: IActions = {
       type: ActionNames.FETCH_ARTICLES,
       params
     };
+  },
+
+  /**
+   * @param {number | string} id
+   * @return {IFetchArticleAction}
+   */
+  fetchArticle(id) {
+    return {
+      type: ActionNames.FETCH_ARTICLE,
+      id
+    };
   }
 };
 

@@ -9,6 +9,7 @@ import LoginContainer from 'containers/pages/LoginContainer';
 import RegisterContainer from 'containers/pages/RegisterContainer';
 import HomeContainer from 'containers/pages/HomeContainer';
 import ArticlesContainer from 'containers/pages/ArticlesContainer';
+import ArticleContainer from 'containers/pages/ArticleContainer';
 
 function MainRouter(props) {
   const {isAuthenticated} = props;
@@ -35,6 +36,11 @@ function MainRouter(props) {
         <CommonLayout
           path={routes.ARTICLES}
           component={ArticlesContainer}
+          isAuthenticated={isAuthenticated}
+        />
+        <CommonLayout
+          path={routes.ARTICLE}
+          component={ArticleContainer}
           isAuthenticated={isAuthenticated}
         />
       </Switch>

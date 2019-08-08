@@ -4,7 +4,9 @@ import {
   ArticleActions,
   IArticlesState,
   IFetchArticlesSuccessAction,
-  IFetchArticlesErrorAction
+  IFetchArticlesErrorAction,
+  IFetchArticleSuccessAction,
+  IFetchArticleErrorAction
 } from './types';
 
 const initialState: IArticlesState = {
@@ -12,6 +14,7 @@ const initialState: IArticlesState = {
     ids: [],
     byId: {}
   },
+  article: {},
   pagination: {
     offset: 0,
     limit: 0,
@@ -52,6 +55,34 @@ function errorArticles(state: IArticlesState, action: IFetchArticlesErrorAction)
   };
 }
 
+function requestArticle(state: IArticlesState): IArticlesState {
+  return {
+    ...state,
+    error: null
+  };
+}
+
+function successArticle(state: IArticlesState, action: IFetchArticleSuccessAction): IArticlesState {
+  return {
+    ...state,
+    article: action.article
+  };
+}
+
+function errorArticle(state: IArticlesState, action: IFetchArticleErrorAction): IArticlesState {
+  return {
+    ...state,
+    article: action.error
+  };
+}
+
+function flushArticleState(state: IArticlesState): IArticlesState {
+  return {
+    ...state,
+    article: {}
+  };
+}
+
 export default function(state = initialState, action: ArticleActions): IArticlesState {
   switch (action.type) {
     case ActionNames.FETCH_ARTICLES_REQUEST:
@@ -60,6 +91,14 @@ export default function(state = initialState, action: ArticleActions): IArticles
       return successArticles(state, action);
     case ActionNames.FETCH_ARTICLES_ERROR:
       return errorArticles(state, action);
+    case ActionNames.FETCH_ARTICLE_REQUEST:
+      return requestArticle(state);
+    case ActionNames.FETCH_ARTICLE_SUCCESS:
+      return successArticle(state, action);
+    case ActionNames.FETCH_ARTICLE_ERROR:
+      return errorArticle(state, action);
+    case ActionNames.FLUSH_ARTICLE_STATE:
+      return flushArticleState(state);
     default:
       return state;
   }

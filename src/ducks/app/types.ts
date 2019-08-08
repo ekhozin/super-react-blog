@@ -9,7 +9,8 @@ export enum ActionNames {
   LOGIN_USER = '@@app/LOGIN_USER',
   REGISTER_USER = '@@app/REGISTER_USER',
   LOGOUT_USER = '@@app/LOGOUT_USER',
-  FETCH_ARTICLES = '@@app/FETCH_ARTICLES'
+  FETCH_ARTICLES = '@@app/FETCH_ARTICLES',
+  FETCH_ARTICLE = '@@app/FETCH_ARTICLE'
 }
 
 export interface IActions {
@@ -18,6 +19,7 @@ export interface IActions {
   registerUser: IRegisterUser;
   logoutUser: ILogoutUser;
   fetchArticles: IFetchArticles;
+  fetchArticle: IFetchArticle;
 }
 
 export interface IInitApp {
@@ -26,6 +28,10 @@ export interface IInitApp {
 
 export interface IFetchArticles {
   (params: IQueryParams): IFetchArticlesAction;
+}
+
+export interface IFetchArticle {
+  (id: number | string): IFetchArticleAction;
 }
 
 export interface ILoginUser {
@@ -67,9 +73,15 @@ export interface IFetchArticlesAction {
   params?: IQueryParams;
 }
 
+export interface IFetchArticleAction {
+  type: typeof ActionNames.FETCH_ARTICLE;
+  id: number | string;
+}
+
 export type AppActionTypes =
   IInitAppAction |
   ILoginUserAction |
   IRegisterUserAction |
   ILogoutUserAction |
-  IFetchArticlesAction;
+  IFetchArticlesAction |
+  IFetchArticleAction;

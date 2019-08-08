@@ -6,7 +6,6 @@ import actions from './actions';
 import services from './services';
 
 /**
- *
  * @param {IQueryParams} params
  * @return {SagaIterator}
  */
@@ -17,5 +16,19 @@ export function* fetchArticlesSaga(params?: IQueryParams): SagaIterator {
     yield put(actions.fetchArticlesSuccess(payload));
   } catch (error) {
     yield put(actions.fetchArticlesError(error));
+  }
+}
+
+/**
+ * @param {string | number} id Article id.
+ * @return {SagaIterator}
+ */
+export function* fetchArticleSaga(id: string | number): SagaIterator {
+  try {
+    yield put(actions.fetchArticleRequest());
+    const payload = yield call(services.fetchArticle, id);
+    yield put(actions.fetchArticleSuccess(payload));
+  } catch (error) {
+    yield put(actions.fetchArticleError(error));
   }
 }

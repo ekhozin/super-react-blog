@@ -4,13 +4,13 @@ import {connect} from 'react-redux';
 import {AppState} from 'store/root-reducer';
 import {IFetchArticles} from 'ducks/app/types';
 import {IPagination} from 'ts/interfaces/common';
-import {IArticle} from 'ducks/articles/types';
+import {TArticlePreview} from 'ducks/articles/types';
 import Articles from 'components/pages/articles/Articles';
 import appActions from 'ducks/app/actions';
 import articlesSelectors from 'ducks/articles/selectors';
 
 interface IStateToProps {
-  articles: IArticle[];
+  articles: TArticlePreview[];
   pagination: IPagination;
 }
 
@@ -36,7 +36,7 @@ function ArticlesContainer(props: TReduxProps): React.ReactElement<TReduxProps> 
 }
 
 const mapStateToProps = (state: AppState): IStateToProps => ({
-  articles: articlesSelectors.selectArticlesList(state),
+  articles: articlesSelectors.selectArticlesToList(state),
   pagination: articlesSelectors.selectPagination(state)
 });
 
