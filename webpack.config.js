@@ -62,9 +62,28 @@ const config = {
    * Output options
    */
   output: {
+    /**
+     * This option specifies the public URL of the output directory when referenced in a browser.
+     * A relative URL is resolved relative to the HTML page.
+     * https://webpack.js.org/configuration/output/#outputpublicpath
+     */
     publicPath: '/',
+    /**
+     * The output directory as an absolute path.
+     * https://webpack.js.org/configuration/output/#outputpath
+     */
     path: publicFolder,
-    filename: process.env.NODE_ENV !== 'production' ? '[hash].bundle.js' : '[hash].bundle.min.js'
+    /**
+     * Determines the name of each output bundle.
+     * https://webpack.js.org/configuration/output/#outputfilename
+     */
+    filename: process.env.NODE_ENV !== 'production' ? '[name].[hash].bundle.js' : '[name].[hash].bundle.min.js',
+    /**
+     * Determines the name of non-entry chunk files.
+     * https://webpack.js.org/configuration/output/#outputchunkfilename
+     */
+    chunkFilename:
+      process.env.NODE_ENV !== 'production' ? '[name].[chunkhash].bundle.js' : '[name].[chunkhash].bundle.min.js'
   },
 
   /**

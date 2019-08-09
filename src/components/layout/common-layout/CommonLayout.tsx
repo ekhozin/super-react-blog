@@ -6,7 +6,14 @@ import routes from 'constants/routes';
 import Header from 'components/common/header/Header';
 import styles from './CommonLayout.scss';
 
-function CommonLayout(props) {
+interface IProps {
+  isAuthenticated: boolean;
+  path: string;
+  exact?: boolean;
+  component: React.ComponentType<any>;
+}
+
+function CommonLayout(props: IProps): React.ReactElement<IProps> {
   const {
     component: Component,
     isAuthenticated,
@@ -19,7 +26,7 @@ function CommonLayout(props) {
 
   return (
     <Route
-      render={(props) => (
+      render={(props): React.ReactNode => (
         <div className={styles.CommonLayout}>
           <Header/>
           <div className={styles.content}>
@@ -31,16 +38,5 @@ function CommonLayout(props) {
     />
   );
 }
-
-CommonLayout.propTypes = {
-  exact: PropTypes.bool,
-  path: PropTypes.string.isRequired,
-  component: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
-};
-
-CommonLayout.defaultProps = {
-  exact: false
-};
 
 export default CommonLayout;

@@ -1,18 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MODALS from 'constants/modals';
-import TestModal from './test-modal/TestModal';
-import AnotherModal from './another-modal/AnotherModal';
+import FixedPreloader from 'components/common/preloader/FixedPreloader';
 import styles from './Modals.scss';
+import {modalPaths} from './modals-map';
 
-class Modals extends React.PureComponent {
-  modalsMap = {
-    [MODALS.TEST_MODAL]: (props) => <TestModal key={props.id} {...props}/>,
-    [MODALS.ANOTHER_MODAL]: (props) => <AnotherModal key={props.id} {...props}/>
+class Modals extends React.Component {
+  renderModal = (props) => {
+    const pathToModal = modalPaths[props.id];
+
+    if (!pathToModal) {
+      return null;
+    }
+    // TODO: catch errors when import is failed
+    const ModalComponent = React.lazy(() => import(`${pathToModal}`));
+
+    return (
+      <React.Suspense key={props.id} fallback={<FixedPreloader/>}>
+        <ModalComponent {...this.props} {...props}/>
+      </React.Suspense>
+    );
   };
-
-  renderModal = (props) => this.modalsMap[props.id]({...this.props, ...props});
 
   renderModals = () => this.props.modals.map(this.renderModal);
 

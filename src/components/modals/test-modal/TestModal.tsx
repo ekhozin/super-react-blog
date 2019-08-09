@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MODALS from 'constants/modals';
+import modalNames from 'components/modals/modals-map'
 import ModalContainer from 'containers/common/ModalContainer';
 
 class TestModal extends React.PureComponent {
   handleShowModal = () => {
-    return this.props.showModal(MODALS.ANOTHER_MODAL);
+    return this.props.showModal(modalNames.ANOTHER_MODAL);
   };
 
   render() {

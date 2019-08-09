@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {Provider} from 'react-redux';
 import {IntlProvider} from 'react-intl';
+import {BrowserRouter} from 'react-router-dom';
 
 import ModalsContainer from 'containers/common/ModalsContainer';
 import MainRouter from 'components/main-router/MainRouter';
@@ -22,7 +23,9 @@ function App(props) {
       <IntlProvider locale={locale} messages={messages}>
         <React.Fragment>
           <ModalsContainer/>
-          <MainRouter isAuthenticated={isAuthenticated}/>
+          <BrowserRouter>
+            <MainRouter isAuthenticated={isAuthenticated}/>
+          </BrowserRouter>
         </React.Fragment>
       </IntlProvider>
     </Provider>

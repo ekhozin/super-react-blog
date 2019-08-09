@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import MODALS from 'constants/modals';
+import modalNames from 'components/modals/modals-map';
 
 class Home extends React.Component {
   handleShowModal1 = () => {
-    return this.props.showModal(MODALS.TEST_MODAL);
+    return this.props.showModal(modalNames.TEST_MODAL);
   };
 
   render() {

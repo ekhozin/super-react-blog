@@ -1,12 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {Route, Redirect} from 'react-router-dom';
 
 import routes from 'constants/routes';
 import LanguageSwitcherContainer from 'containers/common/LanguageSwitcherContainer';
 import styles from './AuthLayout.scss';
 
-function AuthLayout(props) {
+interface IProps {
+  isAuthenticated: boolean;
+  path: string;
+  exact?: boolean;
+  component: React.ComponentType<any>;
+}
+
+function AuthLayout(props: IProps): React.ReactElement<IProps> {
   const {
     component: Component,
     isAuthenticated,
@@ -19,7 +25,7 @@ function AuthLayout(props) {
 
   return (
     <Route
-      render={(props) => (
+      render={(props): React.ReactNode => (
         <div className={styles.AuthLayout}>
           <LanguageSwitcherContainer className={styles.languageSwitcher}/>
           <div className={styles.content}>
@@ -31,13 +37,6 @@ function AuthLayout(props) {
     />
   );
 }
-
-AuthLayout.propTypes = {
-  exact: PropTypes.bool,
-  path: PropTypes.string.isRequired,
-  component: PropTypes.func.isRequired,
-  isAuthenticated: PropTypes.bool.isRequired
-};
 
 AuthLayout.defaultProps = {
   exact: false
