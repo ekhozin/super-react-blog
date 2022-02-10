@@ -99,7 +99,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^24.8.0",
     "jest-enzyme": "^7.0.2",
-    "node-sass": "^4.10.0",
+    "node-sass": "^7.0.0",
     "postcss-loader": "^3.0.0",
     "react-hot-loader": "^4.3.12",
     "react-test-renderer": "^16.8.6",
